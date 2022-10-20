@@ -8,6 +8,7 @@ services:
     volumes:
       - ./db_vol:/db
       - ./config_vol:/config
+      - ./src:/app
     environment:
       PYTHONUNBUFFERED: 1
       RW_DB_PATH: /db/ransomwatch.db
