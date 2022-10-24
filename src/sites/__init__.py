@@ -1,4 +1,5 @@
 from .avaddon import Avaddon
+from .blackbyte import Blackbyte
 from .conti import Conti
 from .darkside import DarkSide
 from .revil import REvil

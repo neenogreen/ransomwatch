@@ -16,13 +16,16 @@ logging.basicConfig(
     ]
 )
 
-defang = lambda u: u.replace("http", "hxxp").replace(".onion", "[.]onion")
+
+def defang(u): return u.replace("http", "hxxp").replace(".onion", "[.]onion")
+
 
 def main(argv):
     logging.info("Initializing")
 
     sites_to_analyze = [
         sites.Avaddon,
+        sites.Blackbyte,
         sites.Conti,
         sites.DarkSide,
         sites.REvil,
@@ -69,23 +72,26 @@ def main(argv):
             logging.warning(f"{site.actor} is down, notifying + skipping")
             NotificationManager.send_site_down_notification(s.site)
             continue
-        
+
         if s.first_run:
-            logging.info(f"This is the first scrape for {site.actor}, no victim notifications will be sent")
+            logging.info(
+                f"This is the first scrape for {site.actor}, no victim notifications will be sent")
 
         logging.info(f"Scraping victims")
         try:
             s.scrape_victims()
         except:
-            logging.error(f"Got an error while scraping {site.actor}, notifying")
+            logging.error(
+                f"Got an error while scraping {site.actor}, notifying")
 
             tb = traceback.format_exc()
 
             # send error notifications
-            NotificationManager.send_error_notification(f"{site.actor} scraping", tb)
+            NotificationManager.send_error_notification(
+                f"{site.actor} scraping", tb)
 
             # log exception
-            logging.error(tb.strip()) # there is a trailing newline
+            logging.error(tb.strip())  # there is a trailing newline
 
             # close db session
             s.session.close()
@@ -100,7 +106,7 @@ def main(argv):
             logging.info("Notifying for new victims")
             for v in s.new_victims:
                 NotificationManager.send_new_victim_notification(v)
-        
+
         logging.info(f"Identifying removed victims")
         removed = s.identify_removed_victims()
         logging.info(f"There are {len(removed)} removed victims")
@@ -117,7 +123,8 @@ def main(argv):
         logging.info(f"Finished {site.actor}")
 
     logging.info("Finished all sites, exiting")
-    
+
+
 if __name__ == "__main__":
     try:
         main(sys.argv)
@@ -127,7 +134,8 @@ if __name__ == "__main__":
         tb = traceback.format_exc()
 
         # send slack error notifications
-        NotificationManager.send_error_notification(f"Non-scraping failure", tb, fatal=True)
+        NotificationManager.send_error_notification(
+            f"Non-scraping failure", tb, fatal=True)
 
         # log exception
-        logging.error(tb.strip()) # there is a trailing newline
+        logging.error(tb.strip())  # there is a trailing newline
