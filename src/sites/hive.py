@@ -48,7 +48,7 @@ class Hive(SiteCrawler):
 
                 if q.count() == 0:
                     # new victim
-                    v = Victim(name=name, url=None, published=publish_dt, first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
+                    v = Victim(name=name, url=self.url, published=publish_dt, first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                     self.session.add(v)
                     self.new_victims.append(v)
                 else:
