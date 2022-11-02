@@ -32,6 +32,7 @@ sites:
   # this has to be their API url, see readme for details
   hive: http://hiveapisomething.onion
   rook: http://something.onion
+  blackbyte: http://something.onion
 
 # slack webhooks
 notifications:
