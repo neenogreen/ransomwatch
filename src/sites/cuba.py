@@ -71,13 +71,13 @@ class Cuba(SiteCrawler):
             # they put the published date in the victim's leak page
             victim_leak_site = self.url + victim.find("a").attrs["href"]
 
-            r = p.get(victim_leak_site, headers=self.headers)
-            published_dt = self.extract_published_date(r.content.decode())
             q = self.session.query(Victim).filter_by(
                 url=victim_leak_site, site=self.site)
 
             if q.count() == 0:
                 # new victim
+                r = p.get(victim_leak_site, headers=self.headers)
+                published_dt = self.extract_published_date(r.content.decode())
                 v = Victim(name=victim_name, url=victim_leak_site, published=published_dt,
                            first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
