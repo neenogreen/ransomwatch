@@ -1,6 +1,8 @@
 from datetime import datetime
 import logging
 from config import Config
+from random import randint
+from time import sleep
 
 from bs4 import BeautifulSoup
 
@@ -47,9 +49,21 @@ class Lockbit(SiteCrawler):
 
         victim_list = soup.find_all("div", class_=['post-block bad', 'post-block good'])
 
+        i = 0
         for victim in victim_list:
+            i += 1
+            logging.info("Lockbit: scarping " + str(i) + "/" + str(len(victim_list)))
             victim_name = victim.find("div", class_="post-title").text.strip()
             victim_leak_site = self.url + victim["onclick"].split("'")[1]
+            
+            while True:
+                try:
+                    with Proxy() as p:
+                        r = p.get(f"{victim_leak_site}", headers=self.headers)
+                    break
+                except:
+                    sleep(randint(1,2))
+                    pass
             
             with Proxy() as p:
                 r = p.get(f"{victim_leak_site}", headers=self.headers)
@@ -73,6 +87,7 @@ class Lockbit(SiteCrawler):
 
             # add the org to our seen list
             self.current_victims.append(v)
+            sleep(randint(1,2))
         self.session.commit()
 
     def scrape_victims(self):
