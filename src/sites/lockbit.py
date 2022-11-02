@@ -49,37 +49,32 @@ class Lockbit(SiteCrawler):
 
         victim_list = soup.find_all("div", class_=['post-block bad', 'post-block good'])
 
-        i = 0
         for victim in victim_list:
-            i += 1
-            logging.info("Lockbit: scarping " + str(i) + "/" + str(len(victim_list)))
             victim_name = victim.find("div", class_="post-title").text.strip()
             victim_leak_site = self.url + victim["onclick"].split("'")[1]
             
-            while True:
-                try:
-                    with Proxy() as p:
-                        r = p.get(f"{victim_leak_site}", headers=self.headers)
-                    break
-                except:
-                    sleep(randint(1,2))
-                    pass
-            
-            with Proxy() as p:
-                r = p.get(f"{victim_leak_site}", headers=self.headers)
-            soup1 = BeautifulSoup(r.content.decode(), "html.parser")
-            deadline = soup1.find_all("p", class_="post-banner-p")[0].text.strip()[10:]
-
-            published_dt = datetime.strptime(deadline, "%d %b, %Y %H:%M:%S %Z")
             q = self.session.query(Victim).filter_by(
                 url=victim_leak_site, site=self.site)
 
             if q.count() == 0:
                 # new victim
+                while True:
+                    try:
+                        with Proxy() as p:
+                            r = p.get(f"{victim_leak_site}", headers=self.headers)
+                        break
+                    except:
+                        sleep(randint(1,2))
+                        pass
+                soup1 = BeautifulSoup(r.content.decode(), "html.parser")
+                deadline = soup1.find_all("p", class_="post-banner-p")[0].text.strip()[10:]
+
+                published_dt = datetime.strptime(deadline, "%d %b, %Y %H:%M:%S %Z")
                 v = Victim(name=victim_name, url=victim_leak_site, published=published_dt,
                             first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
                 self.new_victims.append(v)
+                sleep(randint(1,2))
             else:
                 # already seen, update last_seen
                 v = q.first()
@@ -87,7 +82,6 @@ class Lockbit(SiteCrawler):
 
             # add the org to our seen list
             self.current_victims.append(v)
-            sleep(randint(1,2))
         self.session.commit()
 
     def scrape_victims(self):
