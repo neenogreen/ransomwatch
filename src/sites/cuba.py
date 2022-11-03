@@ -89,6 +89,7 @@ class Cuba(SiteCrawler):
 
             # add the org to our seen list
             self.current_victims.append(v)
+        self.site.last_scraped = datetime.utcnow()
         self.session.commit()
 
     def scrape_victims(self):
