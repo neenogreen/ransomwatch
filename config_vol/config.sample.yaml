@@ -33,6 +33,7 @@ sites:
   hive: http://hiveapisomething.onion
   rook: http://something.onion
   blackbyte: http://something.onion
+  alphv: http://something.onion
 
 # slack webhooks
 notifications:
