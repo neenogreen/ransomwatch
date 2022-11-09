@@ -33,7 +33,7 @@ First, build the container: `docker-compose build app`
 Then, add it to your crontab. Example crontab entry (running every 8 hours):
 
 ```
-0 */8 * * * cd /path/to/ransomwatch && docker-compose up --abort-on-container-exit
+*/30 * * * * cd /home/ioc/ransomwatch && ./run.sh
 ```
 
 If you'd prefer, you can use the image published on Docker Hub ([`captaingeech/ransomwatch`](https://hub.docker.com/repository/docker/captaingeech/ransomwatch/general)) instead, with a `docker-compose.yml` that looks something like this:
