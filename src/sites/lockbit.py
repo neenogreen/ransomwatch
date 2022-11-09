@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 from db.models import Victim
 from net.proxy import Proxy
 from .sitecrawler import SiteCrawler
+from notifications.manager import NotificationManager
 
 
 class Lockbit(SiteCrawler):
@@ -32,7 +33,7 @@ class Lockbit(SiteCrawler):
     def is_site_up(self) -> bool:
         with Proxy() as p:
             try:
-                r = p.get(self.url, headers=self.headers, timeout=Config["timeout"])
+                r = p.get(self.url, headers=self.headers)
 
                 if r.status_code >= 400:
                     return False
@@ -78,6 +79,10 @@ class Lockbit(SiteCrawler):
             else:
                 # already seen, update last_seen
                 v = q.first()
+                if victim.find("div", class_="post-timer-end d-none"):
+                    if v.first_seen < v.published and v.published <= datetime.utcnow():
+                        NotificationManager.send_new_victim_notification(v)
+                        v.first_seen = v.published
                 v.last_seen = datetime.utcnow()
 
             # add the org to our seen list
