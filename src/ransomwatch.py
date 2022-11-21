@@ -5,6 +5,7 @@ import traceback
 from config import Config
 from notifications import NotificationManager
 import sites
+from net.proxy import Proxy
 
 logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -59,6 +60,16 @@ def main(argv):
     ]
 
     logging.info(f"Found {len(sites_to_analyze)} sites")
+
+    with Proxy() as p:
+        try:
+            r = p.get("http://ifconfig.me/ip", timeout = 60)
+            if r.status_code >= 400:
+                logging.warning(f"The web service for public IP fetch is down")
+            else:
+                logging.info(f"Public Tor IP address: {r.text}")
+        except Exception as e:
+            logging.warning(f"The web service for public IP fetch can't be reached")
 
     for site in sites_to_analyze:
         logging.info(f"Starting process for {site.actor}")
