@@ -7,3 +7,5 @@ pyyaml
 python-dateutil
 lxml
 dateparser
+websocket-client
+python-socks

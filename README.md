@@ -86,6 +86,7 @@ The following leak sites are supported:
 - [X] Lockbit
 - [X] Hive
 - [X] Blackbyte
+- [X] Blackbasta
 
 ## Leak Sites lists
 
