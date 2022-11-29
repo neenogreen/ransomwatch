@@ -28,6 +28,7 @@ class Blackbasta(SiteCrawler):
         except Exception:
             return False
         if res:
+            self.site.last_up = datetime.utcnow()
             return True
         return False
         
@@ -61,7 +62,6 @@ class Blackbasta(SiteCrawler):
                     NotificationManager.send_new_victim_notification(v)
             # add the org to our seen list
             self.current_victims.append(v)
-        self.site.last_scraped = datetime.utcnow()
         self.session.commit()
 
     def scrape_victims(self):
