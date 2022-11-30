@@ -37,7 +37,6 @@ class Alphv(SiteCrawler):
                 if r.status_code >= 400:
                     return False
             except Exception as e:
-                print(e)
                 return False
 
         self.site.last_up = datetime.utcnow()
@@ -73,11 +72,14 @@ class Alphv(SiteCrawler):
 
     def scrape_victims(self):
         page = 0
-        while True:
-            with Proxy() as p:
-                r = p.get(self.url + "/api/blog/all/" + str(page) + "/9", headers=self.headers)
-                if "\"items\":[]" in r.text:
+        with Proxy() as p:
+            while True:
+                try:
+                    r = p.get(self.url + "/api/blog/all/" + str(page) + "/9", headers=self.headers)
+                    if "\"items\":[]" in r.text:
+                        break
+                    self._handle_page(r.content.decode())
+                    page += 9
+                except Exception as e:
                     break
-                self._handle_page(r.content.decode())
-                page += 9
         self.site.last_scraped = datetime.utcnow()
