@@ -66,34 +66,18 @@ class Cuba(SiteCrawler):
         victim_list = soup.find_all("div", class_="list-text")
 
         for victim in victim_list:
-
-            victim_description = victim.find("a").text.strip().split(" ")
-
-            # extract company name by getting only the first few words that start with a capitalized letter
-            victim_name = ""
-
-            for word in victim_description:
-                if word[0].isupper() or word == "and":
-                    victim_name += word + " "
-                else:
-                    break
-
-            victim_name = victim_name[:-1]  # Delete the last space
-
-            if victim_name[-2:] == "is":
-                # hard-code this. They forgot to add a space to one name, so I can't properly scrape it
-                victim_name = victim_name[:-2]
-
+            # extract victim name from url
+            victim_name = victim.find("a").attrs["href"][9:]
             # they put the published date in the victim's leak page
-            victim_leak_site = victim.find("a").attrs["href"]
+            victim_leak_site = self.url + victim.find("a").attrs["href"]
 
-            r = p.get(self.url[:-1]+victim_leak_site, headers=self.headers)
-            published_dt = self.extract_published_date(r.content.decode())
             q = self.session.query(Victim).filter_by(
                 url=victim_leak_site, site=self.site)
 
             if q.count() == 0:
                 # new victim
+                r = p.get(victim_leak_site, headers=self.headers)
+                published_dt = self.extract_published_date(r.content.decode())
                 v = Victim(name=victim_name, url=victim_leak_site, published=published_dt,
                            first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
@@ -105,20 +89,17 @@ class Cuba(SiteCrawler):
 
             # add the org to our seen list
             self.current_victims.append(v)
+        self.site.last_scraped = datetime.utcnow()
         self.session.commit()
 
     def scrape_victims(self):
         with Proxy() as p:
-            r = p.get(f"{self.url}", headers=self.headers)
+            cnt = 0
+            while True:
+                r = p.get(f"{self.url}/ajax/page_free/{cnt}", headers=self.headers)
+                if "nomore" in r.content.decode():
+                    break
 
-            soup = BeautifulSoup(r.content.decode(), "html.parser")
-            self._handle_page(r.content.decode(), p)
-            # inner_sites = soup.find_all(
-            #    "div", class_="ajax-load-more-wrap default")
-            # print("11111111")
-            # for site in inner_sites:
-            #    print("2222222")
-            #    site_url = site.attrs["data-canonical-url"]
-            #    print(site_url)
-            #    r = p.get(site_url, headers=self.headers)
-            #    self._handle_page(r.content.decode(), p)
+                soup = BeautifulSoup(r.content.decode(), "html.parser")
+                self._handle_page(r.content.decode(), p)
+                cnt += 1

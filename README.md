@@ -33,7 +33,7 @@ First, build the container: `docker-compose build app`
 Then, add it to your crontab. Example crontab entry (running every 8 hours):
 
 ```
-0 */8 * * * cd /path/to/ransomwatch && docker-compose up --abort-on-container-exit
+*/30 * * * * cd /home/ioc/ransomwatch && ./run.sh
 ```
 
 If you'd prefer, you can use the image published on Docker Hub ([`captaingeech/ransomwatch`](https://hub.docker.com/repository/docker/captaingeech/ransomwatch/general)) instead, with a `docker-compose.yml` that looks something like this:
@@ -80,35 +80,15 @@ The messages sent to Discord and Teams are very similar in style, identical in c
 
 The following leak sites are supported:
 
-- [x] Conti
-- [X] Sodinokibi/REvil
-- [X] Pysa
-- [X] Avaddon
-- [X] DarkSide
-- [X] CL0P
-- [X] Nefilim
-- [X] Mount Locker
-- [X] Suncrypt
 - [x] Everest
-- [X] Ragnarok
-- [X] Ragnar_Locker
-- [X] BABUK LOCKER
-- [X] Pay2Key
 - [X] Cuba
 - [X] RansomEXX
-- [X] Pay2Key
-- [X] Ranzy Locker
-- [X] Astro Team
-- [X] BlackMatter
-- [X] Arvin
-- [X] El_Cometa
-- [X] Lorenz
-- [X] Xing
 - [X] Lockbit
-- [X] AvosLocker
-- [X] LV
-- [X] Marketo
-- [X] Lockdata
-- [X] Rook
+- [X] Hive
+- [X] Blackbyte
+- [X] Blackbasta
 
-If there are other leak sites you want implemented, feel free to open a PR or DM me on Twitter, [@captainGeech42](https://twitter.com/captainGeech42)
+## Leak Sites lists
+
+- https://ransomwatch.telemetry.ltd/#/INDEX
+- https://github.com/fastfire/deepdarkCTI/blob/main/ransomware_gang.md

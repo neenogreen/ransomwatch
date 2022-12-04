@@ -29,3 +29,5 @@ from .lv import LV
 from .marketo import Marketo
 from .lockdata import LockData
 from .rook import Rook
+from .alphv import Alphv
+from .blackbasta import Blackbasta
