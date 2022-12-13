@@ -50,6 +50,7 @@ class Alphv(SiteCrawler):
         for victim in victim_list:
             victim_name = victim["title"]
             victim_leak_site = self.url + "/" + victim["id"]
+            victim_description = victim["publication"]["description"] + "\n\n" + victim["publication"]["message"]
             
             q = self.session.query(Victim).filter_by(
                 url=victim_leak_site, site=self.site)
@@ -57,8 +58,7 @@ class Alphv(SiteCrawler):
             if q.count() == 0:
                 # new victim
                 published_dt = datetime.fromtimestamp(int(victim["createdDt"]) / 1000.0)
-                v = Victim(name=victim_name, url=victim_leak_site, published=published_dt,
-                            first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
+                v = Victim(name=victim_name, description=victim_description, url=victim_leak_site, published=published_dt, first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
                 self.new_victims.append(v)
             else:

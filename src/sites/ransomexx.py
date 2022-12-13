@@ -19,6 +19,7 @@ class RansomEXX(SiteCrawler):
             victim_name = victim.find("h5", class_="card-title").text.strip()
 
             published = victim.find("p", class_="card-text mt-3 text-secondary").text[11:21]
+            description = victim.findAll("p", class_="card-text")[1].text
             published_dt = datetime.strptime(
                 published, "%Y-%m-%d")
 
@@ -29,8 +30,7 @@ class RansomEXX(SiteCrawler):
 
             if q.count() == 0:
                 # new victim
-                v = Victim(name=victim_name, url=victim_leak_site, published=published_dt,
-                           first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
+                v = Victim(name=victim_name, description=description, url=victim_leak_site, published=published_dt, first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
                 self.new_victims.append(v)
             else:

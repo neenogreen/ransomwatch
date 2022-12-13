@@ -11,7 +11,19 @@ from .sitecrawler import SiteCrawler
 class Everest(SiteCrawler):
     actor = "Everest"
 
-    def _handle_page(self, body: str):
+    def extract_description(self, body: str):
+        soup = BeautifulSoup(body, "html.parser")
+        desc_html = soup.find("div", class_="entry-content")
+        p_lines = desc_html.find_all("p")
+        description = ""
+
+        for line in p_lines:
+            description += line.text.strip()
+            description += "\n"
+
+        return description
+
+    def _handle_page(self, body: str, p: Proxy):
         soup = BeautifulSoup(body, "html.parser")
 
         victim_list = soup.find_all(
@@ -24,9 +36,6 @@ class Everest(SiteCrawler):
             victim_leak_site = victim.find(
                 "h2", class_="entry-title heading-size-1").find("a").attrs["href"]
 
-            #published = victim.find("li", class_="post-date meta-wrapper").find("a").text.strip()
-            # published_dt = datetime.strptime(
-            #    published, "%B %d, %Y")
             published_dt = datetime.now()
 
             q = self.session.query(Victim).filter_by(
@@ -34,8 +43,9 @@ class Everest(SiteCrawler):
 
             if q.count() == 0:
                 # new victim
-                v = Victim(name=victim_name, url=victim_leak_site, published=published_dt,
-                           first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
+                r = p.get(victim_leak_site, headers=self.headers)
+                description = self.extract_description(r.content.decode())
+                v = Victim(name=victim_name, description=description, url=victim_leak_site, published=published_dt, first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
                 self.new_victims.append(v)
             else:
@@ -78,14 +88,14 @@ class Everest(SiteCrawler):
 
             base_site = site_list[0]
             r = p.get(base_site, headers=self.headers)
-            self._handle_page(r.content.decode())
+            self._handle_page(r.content.decode(), p)
 
             for pagenum in range(min_page, max_page+1):
                 site_tovisit = base_site + \
                     "/page/"+str(pagenum)+"/"
                 #print("Site "+site_tovisit)
                 r = p.get(site_tovisit, headers=self.headers)
-                self._handle_page(r.content.decode())
+                self._handle_page(r.content.decode(), p)
 
             self.site.last_scraped = datetime.utcnow()
             self.session.commit()

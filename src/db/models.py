@@ -33,6 +33,7 @@ class Victim(Base):
 
     site_id = Column(Integer, ForeignKey("sites.id"))
     site = relationship("Site")
+    description = Column(String, nullable=True, default=None)
 
     def __repr__(self):
         return f"<Victim {self.name} by {self.site.actor}>"

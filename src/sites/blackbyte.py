@@ -14,10 +14,11 @@ class Blackbyte(SiteCrawler):
     def _handle_page(self, body: str):
         soup = BeautifulSoup(body, "html.parser")
 
-        victim_list = soup.find_all("tr", class_="content-fone")
+        victim_list = soup.select('div[class*="col-sm-12"]')
 
         for victim in victim_list:
             victim_name = victim.find("h1").text.strip()
+            description = victim.find("p").text.strip()
 
             published_dt = datetime.now()
             
@@ -26,7 +27,7 @@ class Blackbyte(SiteCrawler):
 
             if q.count() == 0:
                 # new victim
-                v = Victim(name=victim_name, url=None, published=published_dt,
+                v = Victim(name=victim_name, description=description, url=None, published=published_dt,
                             first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
                 self.new_victims.append(v)

@@ -40,6 +40,7 @@ class Blackbasta(SiteCrawler):
             victim_name = victim["title"]
             pub_data = victim["data_published"]
             victim_leak_site = self.url + "/?id=" + victim_name + "#" + str(pub_data)
+            description = victim["description"]
             
             q = self.session.query(Victim).filter_by(
                 name=victim_name, site=self.site)
@@ -47,6 +48,7 @@ class Blackbasta(SiteCrawler):
             if q.count() == 0:
                 # new victim
                 v = Victim(name=victim_name, url=victim_leak_site,
+                            description=description,
                             published=datetime.utcnow(),
                             first_seen=datetime.utcnow(),
                             last_seen=datetime.utcnow(), site=self.site)

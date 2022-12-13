@@ -43,12 +43,13 @@ class Hive(SiteCrawler):
                 logging.debug(f"Found victim: {name}")
 
                 publish_dt = datetime.strptime(entry["disclosed_at"], "%Y-%m-%dT%H:%M:%SZ")
+                description = entry["description"]
 
                 q = self.session.query(Victim).filter_by(site=self.site, name=name)
 
                 if q.count() == 0:
                     # new victim
-                    v = Victim(name=name, url=None, published=publish_dt, first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
+                    v = Victim(name=name, description=description, url=None, published=publish_dt, first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                     self.session.add(v)
                     self.new_victims.append(v)
                 else:

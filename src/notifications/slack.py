@@ -49,6 +49,10 @@ class SlackNotification(NotificationSource):
                                 {
                                     "type": "mrkdwn",
                                     "text": f"*First Seen:*\n{datetime.strftime(victim.first_seen, '%b %d, %Y at %H:%M:%S UTC')}"
+                                },
+                                {
+                                    "type": "mrkdwn",
+                                    "text": f"*Description:*\n{victim.description}"
                                 }
                             ]
                         },
