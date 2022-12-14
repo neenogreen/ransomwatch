@@ -9,3 +9,4 @@ lxml
 dateparser
 websocket-client
 python-socks
+selenium
