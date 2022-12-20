@@ -5,6 +5,7 @@ from db.models import Site, Victim
 from .slack import SlackNotification
 from .discord import DiscordNotification
 from .teams import TeamsNotification
+from .ctis import CTISNotification
 
 class NotificationManager():
     def send_new_victim_notification(victim: Victim):
@@ -22,6 +23,10 @@ class NotificationManager():
                 elif params["type"] == "discord":
                     if not DiscordNotification.send_new_victim_notification(params["url"], victim):
                         logging.error(f"Failed to send new victim notification to Discord guild \"{dest}\"")
+                elif params["type"] == "ctis":
+                    ctis_instance = CTISNotification(params["url"], params["username"], params["password"])
+                    if not ctis_instance.send_new_victim_notification(victim):
+                        logging.error(f"Failed to send new victim notification to CTIS \"{dest}\"")
                 else:
                     logging.error(f"Attempted to send a new victim notification to an unsupported notification type: {params['type']}")
     

@@ -67,6 +67,15 @@ notifications:
     removed_victims: true
     down_sites: true
     errors: false
+  dest3:
+    type: ctis
+    url: https://example.com
+    username: user
+    password: pass
+    new_victims: true
+    removed_victims: false # not implemented, useless
+    down_sites: false # not implemented, useless
+    errors: false # not implemented, useless
 
 # how many seconds to wait for a connection
 # this is used to check if the site is up, and doesn't wait
