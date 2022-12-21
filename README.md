@@ -87,6 +87,9 @@ The following leak sites are supported:
 - [X] Hive
 - [X] Blackbyte
 - [X] Blackbasta
+- [X] Lorenz
+- [X] Cl0p
+- [X] ViceSociety
 
 ## Leak Sites lists
 
