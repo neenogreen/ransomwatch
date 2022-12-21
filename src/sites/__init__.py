@@ -31,3 +31,4 @@ from .lockdata import LockData
 from .rook import Rook
 from .alphv import Alphv
 from .blackbasta import Blackbasta
+from .vicesociety import ViceSociety
