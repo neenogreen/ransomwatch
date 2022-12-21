@@ -33,8 +33,15 @@ class Cl0p(SiteCrawler):
 
                 if q.count() == 0:
                     # new victim
-                    v = Victim(name=victim_name, url=victim_leak_site, published=None,
-                               first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
+                    r = p.get(victim_leak_site, headers=self.headers)
+                    soup1 = BeautifulSoup(r.content.decode(), "html.parser")
+                    description = soup1.find("p").text.strip()
+                    
+                    v = Victim(name=victim_name, url=victim_leak_site,
+                            description=description,
+                            published=datetime.utcnow(),
+                            first_seen=datetime.utcnow(),
+                            last_seen=datetime.utcnow(), site=self.site)
                     self.session.add(v)
                     self.new_victims.append(v)
                 else:
