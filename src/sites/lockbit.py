@@ -61,8 +61,8 @@ class Lockbit(SiteCrawler):
                 v = q.first()
                 if victim.find("div", class_="post-timer-end"):
                     if v.first_seen < v.published and v.published <= datetime.utcnow():
-                        v.first_seen = v.published
                         NotificationManager.send_new_victim_notification(v)
+                        v.first_seen = v.published
                 v.last_seen = datetime.utcnow()
 
             # add the org to our seen list
