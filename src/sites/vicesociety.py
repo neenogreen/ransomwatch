@@ -8,8 +8,8 @@ from net.proxy import Proxy
 from .sitecrawler import SiteCrawler
 
 
-class Cl0p(SiteCrawler):
-    actor = "Cl0p"
+class ViceSociety(SiteCrawler):
+    actor = "ViceSociety"
 
     def scrape_victims(self):
         with Proxy() as p:
@@ -17,25 +17,24 @@ class Cl0p(SiteCrawler):
 
             soup = BeautifulSoup(r.content.decode(), "html.parser")
 
-            # get max page number
-            victim_list = soup.find("ul", class_="g-toplevel").find_all("li", class_="g-menu-item")
+            victim_list = soup.find("table").find_all("table")[1].find_all("tr")
             for victim in victim_list:
-                victim_name = victim.find("span", class_="g-menu-item-title").text.strip()
-                
-                if victim_name in ("HOME", "HOW TO DOWNLOAD?", "ARCHIVE"):
+                if "View documents" not in victim.text.strip():
                     continue
+                victim_name = victim.find("font", {"size": 4}).text.strip()
                 
-                victim_leak_site = self.url + victim.find("a").attrs["href"]
-                
-                
+                victim_leak_site = victim.find_all("a")[1].attrs["href"]
+                 
                 q = self.session.query(Victim).filter_by(
                     url=victim_leak_site, site=self.site)
 
                 if q.count() == 0:
                     # new victim
-                    r = p.get(victim_leak_site, headers=self.headers)
-                    soup1 = BeautifulSoup(r.content.decode(), "html.parser")
-                    description = soup1.find("p").text.strip()
+                    description = ""
+                    text = victim.find_all("font", {"size": 2})
+                    for e in text:
+                        description += e.text.strip()
+                        description += "\n"
                     
                     v = Victim(name=victim_name, url=victim_leak_site,
                             description=description,
