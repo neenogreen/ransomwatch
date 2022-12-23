@@ -59,7 +59,7 @@ class Lockbit(SiteCrawler):
             else:
                 # already seen, update last_seen
                 v = q.first()
-                if victim.find("div", class_="post-timer-end d-none"):
+                if victim.find("div", class_="post-timer-end"):
                     if v.first_seen < v.published and v.published <= datetime.utcnow():
                         NotificationManager.send_new_victim_notification(v)
                         v.first_seen = v.published
