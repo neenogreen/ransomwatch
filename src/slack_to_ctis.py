@@ -42,6 +42,8 @@ def main(argv):
 
     for e in reversed(conversation_history):
         timestamp = float(e["ts"])
+        if not "subtype" in e.keys():
+            continue
         if e["subtype"] != "bot_message":
             continue
 
