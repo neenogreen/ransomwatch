@@ -179,23 +179,25 @@ class CTISNotification():
         response = requests.post(f"{self.url}/api/auth/login", json={"username": user, "password": password})
         self.headers = {'accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + response.json()["data"]["access_token"]}
 
-    def send_new_victim_notification(self, victim: Victim) -> bool:
+    def send_new_victim_notification(self, victim: Victim, actor: "") -> bool:
+        if actor == "":
+            actor = victim.site.actor
         ok, identity = self.add_victim(victim.name)
         if not ok:
             raise Exception(f"Can't create identity {victim.name}: {identity}")
-        ok, intrusion_set = self.add_intrusion_set(victim.site.actor)
+        ok, intrusion_set = self.add_intrusion_set(actor)
         if not ok:
-            raise Exception(f"Can't create intrusion set {victim.site.actor}: {intrusion_set}")
-        ok, operation = self.add_operation(victim.site.actor + " targets " + victim.name, victim.description)
+            raise Exception(f"Can't create intrusion set {actor}: {intrusion_set}")
+        ok, operation = self.add_operation(actor + " targets " + victim.name, victim.description)
         if not ok:
-            raise Exception(f"Can't create operation {victim.site.actor} on {victim.name}: {operation}")
+            raise Exception(f"Can't create operation {actor} on {victim.name}: {operation}")
         ok, res = self.add_relationship("targets", operation, "x-operations", identity, "identities")
         if not ok:
             raise Exception("Can't create relationship operation -> identity: {res}")
         ok, res = self.add_relationship("attributed-to", operation, "x-operations", intrusion_set, "intrusion-sets")
         if not ok:
             raise Exception(f"Can't create relationship operation -> intrusion-set: {res}")
-        ok, _alert = self.add_alert(victim.site.actor + " leaks data from " + victim.name, f"Published date: {victim.published}\nLeak URL: {victim.url}")
+        ok, _alert = self.add_alert(actor + " leaks data from " + victim.name, f"Published date: {victim.published}\nLeak URL: {victim.url}")
         if not ok:
             raise Exception(f"Can't create alert: {_alert}")
         ok, res = self.add_relationship("related-to", _alert, "alerts", intrusion_set, "intrusion-sets")

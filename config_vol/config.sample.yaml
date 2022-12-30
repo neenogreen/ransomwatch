@@ -98,3 +98,13 @@ proxy:
 
   # password for the tor control service
   password: password
+
+slack_to_ctis:
+  slack:
+    token: PLACEHOLDER
+    channel_id: PLACEHOLDER
+  ctis:
+    url: PLACEHOLDER
+    username: PLACEHOLDER
+    password: PLACEHOLDER
+  time_path: PLACEHOLDER
