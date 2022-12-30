@@ -51,10 +51,10 @@ def main(argv):
 
         try:
             actor = e["attachments"][0]["blocks"][1]["fields"][0]["text"].split("\n")[1]
-            try:
+            if "http" in e["attachments"][0]["blocks"][1]["fields"][1]["text"]:
                 name = e["attachments"][0]["blocks"][1]["fields"][1]["text"].split("\n")[1][1:].split("|")[0]
-            except:
-                name = e["attachments"][0]["blocks"][1]["fields"][1]["text"].split("\n")
+            else:
+                name = e["attachments"][0]["blocks"][1]["fields"][1]["text"].split("\n")[1]
             published = datetime.strptime(e["attachments"][0]["blocks"][1]["fields"][2]["text"].split("\n")[1], "%b %d, %Y")
             first_seen = datetime.strptime(e["attachments"][0]["blocks"][1]["fields"][3]["text"].split("\n")[1], "%b %d, %Y at %H:%M:%S UTC")
             try:
