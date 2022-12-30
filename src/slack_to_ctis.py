@@ -74,6 +74,8 @@ def main(argv):
             notification.send_new_victim_notification(v, actor)
         except:
             logging.error(f"Failed uploading to ctis: {name}")
+            tb = traceback.format_exc()
+            logging.error(tb.strip())
             continue
 
     with open(Config["slack_to_ctis"]["time_path"], "w") as f:
