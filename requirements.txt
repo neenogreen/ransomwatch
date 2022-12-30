@@ -10,3 +10,4 @@ dateparser
 websocket-client
 python-socks
 selenium
+slack_sdk
