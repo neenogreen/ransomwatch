@@ -7,6 +7,7 @@ from net.proxy import Proxy
 from .sitecrawler import SiteCrawler
 
 import json
+from bs4 import BeautifulSoup
 
 from notifications.manager import NotificationManager
 
@@ -56,7 +57,7 @@ class Royal(SiteCrawler):
                     victim_leak_site = victim_leak_site[:tmp]
                 except:
                     victim_leak_site = victim_links[0]
-            victim_description = victim["text"] + "\n"
+            victim_description = BeautifulSoup(victim["text"], "lxml").text + "\n"
             victim_description += "Website: " + victim["url"] + "\n"
             victim_description += "Revenue: " + victim["revenue"] + "\n"
             victim_description += "Employees: " + victim["employees"] + "\n"
