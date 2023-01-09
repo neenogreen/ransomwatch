@@ -64,6 +64,7 @@ The following leak sites are supported:
 - [X] Lorenz
 - [X] Cl0p
 - [X] ViceSociety
+- [X] Royal
 
 ## Leak Sites lists
 

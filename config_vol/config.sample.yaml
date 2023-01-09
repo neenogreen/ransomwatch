@@ -36,6 +36,7 @@ sites:
   alphv: http://something.onion
   blackbasta: http://something.onion
   vicesociety: http://something.onion
+  royal: http://something.onion
 
 # slack webhooks
 notifications:
