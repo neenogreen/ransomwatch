@@ -24,7 +24,6 @@ class Hive(SiteCrawler):
                 if r.status_code >= 400:
                     return False
             except Exception as e:
-                print(e)
                 return False
 
         self.site.last_up = datetime.utcnow()
