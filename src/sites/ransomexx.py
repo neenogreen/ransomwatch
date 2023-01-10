@@ -40,18 +40,14 @@ class RansomEXX(SiteCrawler):
 
             # add the org to our seen list
             self.current_victims.append(v)
-
         self.session.commit()
-        self.site.last_scraped = datetime.utcnow()
-        # just for good measure
-        self.session.commit()
-
-        # in case server/tor proxy relay times out, slowing down scraping a bit
-        time.sleep(1.0)
 
     def scrape_victims(self):
         with Proxy() as p:
-            r = p.get(f"{self.url}", headers=self.headers)
+            try:
+                r = p.get(f"{self.url}", headers=self.headers)
+            except:
+                return
 
             soup = BeautifulSoup(r.content.decode(), "html.parser")
 
@@ -61,6 +57,10 @@ class RansomEXX(SiteCrawler):
 
             for pg_num in range(1,num_pages+1):
                 # scrape each page
-                r = p.get(f"{self.url}/?page={pg_num}", headers=self.headers)
+                try:
+                    r = p.get(f"{self.url}/?page={pg_num}", headers=self.headers)
+                except:
+                    return
                 soup = BeautifulSoup(r.content.decode(), "html.parser")
                 self._handle_page(soup)
+        self.site.last_scraped = datetime.utcnow()
