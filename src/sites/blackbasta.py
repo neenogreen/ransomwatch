@@ -44,7 +44,7 @@ class Blackbasta(SiteCrawler):
             for victim in victim_list:
                 tmp = victim.find("a", class_="blog_name_link")
                 victim_name = tmp.text.strip()
-                victim_leak_site = tmp.href
+                victim_leak_site = tmp["href"]
                 
                 q = self.session.query(Victim).filter_by(
                     url=victim_leak_site, site=self.site)
