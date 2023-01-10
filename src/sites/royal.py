@@ -85,13 +85,9 @@ class Royal(SiteCrawler):
         page = 1
         with Proxy() as p:
             while True:
-                try:
-                    r = p.post(self.url + "/api/posts/list", headers=self.headers, json={"page": page})
-                    if "\"data\":[]" in r.text:
-                        break
-                    self._handle_page(r.content.decode())
-                    page += 1
-                except Exception as e:
-                    print(e)
+                r = p.post(self.url + "/api/posts/list", headers=self.headers, json={"page": page})
+                if "\"data\":[]" in r.text:
                     break
+                self._handle_page(r.content.decode())
+                page += 1
         self.site.last_scraped = datetime.utcnow()
