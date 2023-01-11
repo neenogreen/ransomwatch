@@ -66,6 +66,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [] ViceSociety
 - [X] Royal
 - [] Ragnar Locker
+- [] Babuk
 
 ## Leak Sites lists
 
