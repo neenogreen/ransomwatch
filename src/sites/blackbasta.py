@@ -51,7 +51,7 @@ class Blackbasta(SiteCrawler):
 
                 if q.count() == 0:
                     # new victim
-                    description = soup.find("div", class_="vuepress-markdown-body").get_text().strip()
+                    description = victim.find("div", class_="vuepress-markdown-body").get_text().strip()
                     v = Victim(name=victim_name, description=description, url=victim_leak_site, published=datetime.utcnow(), first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                     self.session.add(v)
                     self.new_victims.append(v)
