@@ -68,6 +68,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [] Ragnar Locker
 - [] Babuk
 - [] Blacktor
+- [] Dark Leak Market
 
 ## Leak Sites lists
 

@@ -38,6 +38,7 @@ sites:
   vicesociety: http://something.onion
   royal: http://something.onion
   blacktor: http://something.onion
+  darkleakmarket: http://something.onion
 
 # slack webhooks
 notifications:

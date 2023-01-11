@@ -34,3 +34,4 @@ from .blackbasta import Blackbasta
 from .vicesociety import ViceSociety
 from .royal import Royal
 from .blacktor import Blacktor
+from .darkleakmarket import DarkLeakMarket
