@@ -2,6 +2,7 @@ from datetime import datetime
 import logging
 import requests
 from typing import Dict
+import json
 
 from db.models import Site, Victim
 from .source import NotificationSource
@@ -18,6 +19,9 @@ class SlackNotification(NotificationSource):
 
     def send_new_victim_notification(url: str, victim: Victim) -> bool:
         published_ts = datetime.strftime(victim.published, '%b %d, %Y') if victim.published is not None else "N/A"
+        description = victim.description
+        if len(description) > 1000:
+            description = description[:1000] + "..."
 
         body = {
             "attachments": [
@@ -52,7 +56,7 @@ class SlackNotification(NotificationSource):
                                 },
                                 {
                                     "type": "mrkdwn",
-                                    "text": f"*Description:*\n{victim.description}"
+                                    "text": f"*Description:*\n{description}"
                                 }
                             ]
                         },
