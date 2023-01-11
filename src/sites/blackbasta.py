@@ -67,14 +67,14 @@ class Blackbasta(SiteCrawler):
             except NoSuchElementException:
                 break
 
-            sleep(10)
+            sleep(15)
 
         self.session.commit()
 
     def scrape_victims(self):
         with HeadlessBrowser() as browser:
             browser.get(f"{self.url}")
-            sleep(15)
+            sleep(20)
             self._handle_page(browser)
         self.site.last_scraped = datetime.utcnow()
 
