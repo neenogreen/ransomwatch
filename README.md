@@ -52,7 +52,7 @@ The messages sent to Discord and Teams are very similar in style, identical in c
 
 ## Leak Site Implementations
 
-The following leak sites are supported:
+The following leak sites are supported (unchecked are currently not monitored by Leonardo):
 
 - [x] Everest
 - [X] Cuba
@@ -62,9 +62,10 @@ The following leak sites are supported:
 - [X] Blackbyte
 - [X] Blackbasta
 - [X] Lorenz
-- [X] Cl0p
-- [X] ViceSociety
+- [] Cl0p
+- [] ViceSociety
 - [X] Royal
+- [] Ragnar Locker
 
 ## Leak Sites lists
 
