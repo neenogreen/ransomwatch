@@ -59,7 +59,8 @@ def main(argv):
         sites.Alphv,
         sites.Blackbasta,
         sites.ViceSociety,
-        sites.Royal
+        sites.Royal,
+        sites.Blacktor
     ]
 
     logging.info(f"Found {len(sites_to_analyze)} sites")
