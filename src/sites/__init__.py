@@ -38,3 +38,4 @@ from .darkleakmarket import DarkLeakMarket
 from .quantum import Quantum
 from .dataleak import DataLeak
 from .omega import Omega
+from .mallox import Mallox

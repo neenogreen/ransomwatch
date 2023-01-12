@@ -42,6 +42,7 @@ sites:
   quantum: http://something.onion
   dataleak: http://something.onion
   omega: http://something.onion
+  mallox: http://something.onion
 
 # slack webhooks
 notifications:
