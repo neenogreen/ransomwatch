@@ -69,6 +69,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [] Babuk
 - [] Blacktor
 - [] Dark Leak Market
+- [] Quantum
 
 ## Leak Sites lists
 
