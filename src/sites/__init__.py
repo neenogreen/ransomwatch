@@ -37,3 +37,4 @@ from .blacktor import Blacktor
 from .darkleakmarket import DarkLeakMarket
 from .quantum import Quantum
 from .dataleak import DataLeak
+from .omega import Omega

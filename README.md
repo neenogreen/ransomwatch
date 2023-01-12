@@ -71,6 +71,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [] Dark Leak Market
 - [] Quantum
 - [] DataLeak
+- [] 0mega
 
 ## Leak Sites lists
 

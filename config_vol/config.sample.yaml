@@ -41,6 +41,7 @@ sites:
   darkleakmarket: http://something.onion
   quantum: http://something.onion
   dataleak: http://something.onion
+  omega: http://something.onion
 
 # slack webhooks
 notifications:
