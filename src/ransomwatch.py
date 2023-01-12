@@ -62,7 +62,8 @@ def main(argv):
         sites.Royal,
         sites.Blacktor,
         sites.DarkLeakMarket,
-        sites.Quantum
+        sites.Quantum,
+        sites.DataLeak
     ]
 
     logging.info(f"Found {len(sites_to_analyze)} sites")
