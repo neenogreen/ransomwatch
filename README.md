@@ -74,6 +74,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [] 0mega
 - [] Mallox
 - [] Qilin
+- [] Unsafe
 
 ## Leak Sites lists
 

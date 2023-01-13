@@ -44,6 +44,7 @@ sites:
   omega: http://something.onion
   mallox: http://something.onion
   qilin: http://something.onion
+  unsafe: http://something.onion
 
 # slack webhooks
 notifications:
