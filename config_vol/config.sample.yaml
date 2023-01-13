@@ -43,6 +43,7 @@ sites:
   dataleak: http://something.onion
   omega: http://something.onion
   mallox: http://something.onion
+  qilin: http://something.onion
 
 # slack webhooks
 notifications:

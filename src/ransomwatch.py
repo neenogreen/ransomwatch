@@ -65,7 +65,8 @@ def main(argv):
         sites.Quantum,
         sites.DataLeak,
         sites.Omega,
-        sites.Mallox
+        sites.Mallox,
+        sites.Qilin
     ]
 
     logging.info(f"Found {len(sites_to_analyze)} sites")

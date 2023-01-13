@@ -73,6 +73,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [] DataLeak
 - [] 0mega
 - [] Mallox
+- [] Qilin
 
 ## Leak Sites lists
 
