@@ -41,3 +41,4 @@ from .omega import Omega
 from .mallox import Mallox
 from .qilin import Qilin
 from .unsafe import Unsafe
+from .play import Play
