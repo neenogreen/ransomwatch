@@ -44,24 +44,13 @@ class Royal(SiteCrawler):
 
         for victim in victim_list:
             victim_name = victim["title"]
-            victim_links = victim["links"]
-            if len(victim_links) == 0:
-                victim_leak_site = victim["id"]
-            elif len(victim_links) == 1:
-                victim_leak_site = victim_links[0]
-            else:
-                try:
-                    victim_leak_site = victim_links[0].split("|")[1]
-                    tmp = self.find_occurrences(victim_leak_site, "/")
-                    tmp = tmp[-1]
-                    victim_leak_site = victim_leak_site[:tmp]
-                except:
-                    victim_leak_site = victim_links[0]
-            victim_description = BeautifulSoup(victim["text"], "lxml").text + "\n"
+            victim_leak_site = self.url + "/" + victim["id"]
+            victim_description = BeautifulSoup(victim["text"], "lxml").get_text() + "\n"
             victim_description += "Website: " + victim["url"] + "\n"
             victim_description += "Revenue: " + victim["revenue"] + "\n"
             victim_description += "Employees: " + victim["employees"] + "\n"
-            victim_description += "Leak size: " + victim["size"]
+            victim_description += "Leak size: " + victim["size"] + "\n"
+            victim_description += "Links: " + str(victim["links"])
 
             q = self.session.query(Victim).filter_by(
                     site=self.site, name=victim_name)
