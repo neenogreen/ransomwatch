@@ -31,7 +31,13 @@ class Play(SiteCrawler):
                 published_dt = datetime.strptime(victim.get_text().strip().split("publication date: ")[1][:10], "%Y-%m-%d")
                 with Proxy() as p:
                     r = p.get(victim_leak_site, headers=self.headers)
-                    victim_description = BeautifulSoup(r.content.decode(), "html.parser").get_text().strip()
+                    tmp = BeautifulSoup(r.content.decode(), "html.parser").find("div", attrs={"style": "font-weight: 100;line-height: 1.75;"}).find_all()
+                    victim_description = ""
+                    for e in tmp:
+                        tmp2 = e.find_all(text=True, recursive=False)
+                        for f in tmp2:
+                            victim_description += f.strip() + "\n"
+
                 v = Victim(name=victim_name, description=victim_description, url=victim_leak_site, published=published_dt, first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
                 self.new_victims.append(v)
