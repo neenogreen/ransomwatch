@@ -75,7 +75,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [] Mallox
 - [] Qilin
 - [] Unsafe
-- [] Play
+- [X] Play
 
 ## Leak Sites lists
 
