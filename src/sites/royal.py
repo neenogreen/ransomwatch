@@ -53,7 +53,7 @@ class Royal(SiteCrawler):
             victim_description += "Links: " + str(victim["links"])
 
             q = self.session.query(Victim).filter_by(
-                    site=self.site, name=victim_name)
+                    site=self.site, url=victim_leak_site)
 
             if q.count() == 0:
                 published_dt = datetime.strptime(victim["time"], "%Y-%B-%d")
