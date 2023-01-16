@@ -42,3 +42,4 @@ from .mallox import Mallox
 from .qilin import Qilin
 from .unsafe import Unsafe
 from .play import Play
+from .bianlial import Bianlial

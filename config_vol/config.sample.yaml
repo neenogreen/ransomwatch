@@ -46,6 +46,7 @@ sites:
   qilin: http://something.onion
   unsafe: http://something.onion
   play: http://something.onion
+  bianlial: http://something.onion
 
 # slack webhooks
 notifications:
