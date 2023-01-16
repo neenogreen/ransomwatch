@@ -62,19 +62,19 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Blackbyte
 - [X] Blackbasta
 - [X] Lorenz
-- [] Cl0p
-- [] ViceSociety
+- [ ] Cl0p
+- [ ] ViceSociety
 - [X] Royal
-- [] Ragnar Locker
-- [] Babuk
-- [] Blacktor
-- [] Dark Leak Market
-- [] Quantum
-- [] DataLeak
-- [] 0mega
-- [] Mallox
-- [] Qilin
-- [] Unsafe
+- [ ] Ragnar Locker
+- [ ] Babuk
+- [ ] Blacktor
+- [ ] Dark Leak Market
+- [ ] Quantum
+- [ ] DataLeak
+- [ ] 0mega
+- [ ] Mallox
+- [ ] Qilin
+- [ ] Unsafe
 - [X] Play
 
 ## Leak Sites lists
