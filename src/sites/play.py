@@ -11,7 +11,7 @@ from .sitecrawler import SiteCrawler
 
 
 class Play(SiteCrawler):
-    actor = "Play"
+    actor = "PLAY Ransomware"
 
     def _handle_page(self, body: str):
         soup = BeautifulSoup(body, "html.parser")

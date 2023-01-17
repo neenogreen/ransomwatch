@@ -45,7 +45,7 @@ sites:
   mallox: http://something.onion
   qilin: http://something.onion
   unsafe: http://something.onion
-  play: http://something.onion
+  play ransomware: http://something.onion
   bianlial: http://something.onion
 
 # slack webhooks
