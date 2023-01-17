@@ -66,7 +66,12 @@ class Ragnar(SiteCrawler):
 
                 if q.count() == 0:
                     # new victim
-                    r = p.get(victim_leak_site, headers=self.headers)
+                    for i in range(5):
+                        try:
+                            r = p.get(victim_leak_site, headers=self.headers)
+                        except:
+                            logging.warning(e)
+                        break
                     soup = BeautifulSoup(r.content.decode(), "html.parser")
                     script_list = soup.find_all("script")
                     # they include the list in javascript code instead of HTML
