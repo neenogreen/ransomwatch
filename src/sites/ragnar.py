@@ -92,8 +92,6 @@ class Ragnar(SiteCrawler):
                     raw_victim_article = js_victim_raw.split(f"{js_marker}(`")[1].split("`);")[0]
                     raw_victim_article = bytes(raw_victim_article, "utf-8").decode("unicode_escape").replace("\\n", "").replace("  ", "").replace("Â ", "")
                     raw_victim_article = re.sub('(?!\\\\")(\\\\)', "", raw_victim_article)
-
-                    print(raw_victim_article)
                     victim_article = json.loads(raw_victim_article)["ops"]
 
                     description = ""
