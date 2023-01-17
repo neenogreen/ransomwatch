@@ -29,7 +29,7 @@ class DataLeak(SiteCrawler):
                 if q.count() == 0:
                     # new victim
                     published = datetime.fromtimestamp(mktime(victim.updated_parsed))
-                    description = BeautifulSoup(victim.summary).get_text()
+                    description = BeautifulSoup(victim.summary, "lxml").get_text()
 
                     v = Victim(name=victim_name, url=victim_leak_site, published=published, first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site, description=description)
                     self.session.add(v)
