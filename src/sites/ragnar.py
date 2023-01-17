@@ -3,6 +3,7 @@ import json
 import logging
 
 from bs4 import BeautifulSoup
+import re
 
 from db.models import Victim
 from net.proxy import Proxy
@@ -89,7 +90,10 @@ class Ragnar(SiteCrawler):
                         raise Exception(f"js victim article not found (tried to locate '{js_marker}')")
 
                     raw_victim_article = js_victim_raw.split(f"{js_marker}(`")[1].split("`);")[0]
-                    raw_victim_article = bytes(raw_victim_article, "utf-8").decode("unicode_escape").replace("\\n", "").replace("  ", "")
+                    raw_victim_article = bytes(raw_victim_article, "utf-8").decode("unicode_escape").replace("\\n", "").replace("  ", "").replace("Â ", "")
+                    raw_victim_article = re.sub('(?!\\\\")(\\\\)', "", raw_victim_article)
+
+                    print(raw_victim_article)
                     victim_article = json.loads(raw_victim_article)["ops"]
 
                     description = ""
