@@ -51,3 +51,4 @@ class Lorenz(SiteCrawler):
         with Proxy() as p:
             r = p.get(f"{self.url}", headers=self.headers)
             self._handle_page(r.content.decode()) 
+        self.site.last_scraped = datetime.utcnow()
