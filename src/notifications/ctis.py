@@ -112,6 +112,7 @@ class CTISNotification():
             {
                 "confidence": 100,
                 "description": description,
+                "labels": ["ransomware"],
                 "name": name,
                 "x-sources": [
                     {
