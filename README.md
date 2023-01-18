@@ -77,6 +77,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [ ] Unsafe
 - [X] Play
 - [ ] Bianlial
+- [ ] Daixin
 
 ## Leak Sites lists
 

@@ -47,6 +47,7 @@ sites:
   unsafe: http://something.onion
   play ransomware: http://something.onion
   bianlial: http://something.onion
+  daixin: http://something.onion
 
 # slack webhooks
 notifications:
