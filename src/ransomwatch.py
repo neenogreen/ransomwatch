@@ -70,7 +70,8 @@ def main(argv):
         sites.Unsafe,
         sites.Play,
         sites.Bianlial,
-        sites.Daixin
+        sites.Daixin,
+        sites.Relic
     ]
 
     logging.info(f"Found {len(sites_to_analyze)} sites")

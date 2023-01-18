@@ -48,6 +48,7 @@ sites:
   play ransomware: http://something.onion
   bianlial: http://something.onion
   daixin: http://something.onion
+  relic: http://something.onion
 
 # slack webhooks
 notifications:

@@ -78,6 +78,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Play
 - [ ] Bianlial
 - [ ] Daixin
+- [ ] Relic
 
 ## Leak Sites lists
 

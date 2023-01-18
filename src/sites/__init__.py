@@ -44,3 +44,4 @@ from .unsafe import Unsafe
 from .play import Play
 from .bianlial import Bianlial
 from .daixin import Daixin
+from .relic import Relic
