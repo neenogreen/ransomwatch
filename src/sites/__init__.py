@@ -45,3 +45,4 @@ from .play import Play
 from .bianlial import Bianlial
 from .daixin import Daixin
 from .relic import Relic
+from .ransomhouse import RansomHouse

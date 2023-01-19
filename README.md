@@ -79,6 +79,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [ ] Bianlial
 - [ ] Daixin
 - [ ] Relic
+- [ ] RansomHouse
 
 ## Leak Sites lists
 

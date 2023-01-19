@@ -49,6 +49,7 @@ sites:
   bianlial: http://something.onion
   daixin: http://something.onion
   relic: http://something.onion
+  ransomhouse: http://something.onion
 
 # slack webhooks
 notifications:

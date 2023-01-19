@@ -71,7 +71,8 @@ def main(argv):
         sites.Play,
         sites.Bianlial,
         sites.Daixin,
-        sites.Relic
+        sites.Relic,
+        sites.RansomHouse
     ]
 
     logging.info(f"Found {len(sites_to_analyze)} sites")
