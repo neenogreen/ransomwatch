@@ -50,6 +50,7 @@ sites:
   daixin: http://something.onion
   relic: http://something.onion
   ransomhouse: http://something.onion
+  nokoyawa: http://something.onion
 
 # slack webhooks
 notifications:

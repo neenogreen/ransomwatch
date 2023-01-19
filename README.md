@@ -80,6 +80,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [ ] Daixin
 - [ ] Relic
 - [ ] RansomHouse
+- [ ] Nokoyawa
 
 ## Leak Sites lists
 
