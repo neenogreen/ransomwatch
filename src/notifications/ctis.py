@@ -177,7 +177,8 @@ class CTISNotification():
         return False
 
     def CTIS_login(self, user, password):
-        response = requests.post(f"{self.url}/api/auth/login", json={"username": user, "password": password})
+        #response = requests.post(f"{self.url}/api/auth/login", json={"username": user, "password": password})
+        response = requests.get(f"{self.url}/login", auth=(user, password))
         self.headers = {'accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + response.json()["data"]["access_token"]}
 
     def send_new_victim_notification(self, victim: Victim, actor: "") -> bool:
