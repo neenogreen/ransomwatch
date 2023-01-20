@@ -6,7 +6,7 @@ from slack_sdk.errors import SlackApiError
 import time
 from config import Config
 from notifications.ctis import CTISNotification
-from notifications.slack import send_error_notification
+from notifications.slack import SlackNotification
 from db.models import Victim
 from datetime import datetime
 
@@ -40,7 +40,8 @@ def main(argv):
         logging.info("{} messages found in {}".format(len(conversation_history), channel_id))
     except SlackApiError as e:
         logging.error("Error getting messages: {}".format(e))
-        send_error_notification(Config["slack_to_ctis"]["slack_error_url"],
+        SlackNotification.send_error_notification(
+                Config["slack_to_ctis"]["slack_error_url"],
                 f"Slack to ctis -> Error getting messages: {e}",
                 traceback.format_exc().strip())
         sys.exit(1)
@@ -79,7 +80,8 @@ def main(argv):
             notification.send_new_victim_notification(v, actor)
         except:
             logging.error(f"Failed uploading to ctis: {name}")
-            send_error_notification(Config["slack_to_ctis"]["slack_error_url"],
+            SlackNotification.send_error_notification(
+                    Config["slack_to_ctis"]["slack_error_url"],
                     f"Slack to ctis -> Failed uploading to ctis: {name}",
                     traceback.format_exc().strip())
             sys.exit(1)
@@ -92,6 +94,7 @@ if __name__ == "__main__":
         main(sys.argv)
     except:
         logging.error(f"Got a fatal error")
-        send_error_notification(Config["slack_to_ctis"]["slack_error_url"],
+        SlackNotification.send_error_notification(
+                Config["slack_to_ctis"]["slack_error_url"],
                 f"Slack to ctis -> Got a fatal error",
                 traceback.format_exc().strip())
