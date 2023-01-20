@@ -35,7 +35,7 @@ sites:
   blackbyte: http://something.onion
   alphv: http://something.onion
   blackbasta: http://something.onion
-  vicesociety: http://something.onion
+  vice spider: http://something.onion
   royal: http://something.onion
   blacktor: http://something.onion
   darkleakmarket: http://something.onion
@@ -51,6 +51,7 @@ sites:
   relic: http://something.onion
   ransomhouse: http://something.onion
   nokoyawa: http://something.onion
+  snatch: http://something.onion
 
 # slack webhooks
 notifications:

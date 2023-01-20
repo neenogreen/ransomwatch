@@ -81,6 +81,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [ ] Relic
 - [ ] RansomHouse
 - [ ] Nokoyawa
+- [ ] Snatch
 
 ## Leak Sites lists
 
