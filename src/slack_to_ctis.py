@@ -6,6 +6,7 @@ from slack_sdk.errors import SlackApiError
 import time
 from config import Config
 from notifications.ctis import CTISNotification
+from notifications.slack import send_error_notification
 from db.models import Victim
 from datetime import datetime
 
@@ -39,6 +40,10 @@ def main(argv):
         logging.info("{} messages found in {}".format(len(conversation_history), channel_id))
     except SlackApiError as e:
         logging.error("Error getting messages: {}".format(e))
+        send_error_notification(Config["slack_to_ctis"]["slack_error_url"],
+                f"Slack to ctis -> Error getting messages: {e}",
+                traceback.format_exc().strip())
+        sys.exit(1)
 
     for e in reversed(conversation_history):
         timestamp = float(e["ts"])
@@ -74,17 +79,19 @@ def main(argv):
             notification.send_new_victim_notification(v, actor)
         except:
             logging.error(f"Failed uploading to ctis: {name}")
-            tb = traceback.format_exc()
-            logging.error(tb.strip())
-            continue
+            send_error_notification(Config["slack_to_ctis"]["slack_error_url"],
+                    f"Slack to ctis -> Failed uploading to ctis: {name}",
+                    traceback.format_exc().strip())
+            sys.exit(1)
 
     with open(Config["slack_to_ctis"]["time_path"], "w") as f:
-        f.write(str(timestamp))
+        f.write(str(timestamp + 0.00001))
 
 if __name__ == "__main__":
     try:
         main(sys.argv)
     except:
         logging.error(f"Got a fatal error")
-        tb = traceback.format_exc()
-        logging.error(tb.strip())  # there is a trailing newline
+        send_error_notification(Config["slack_to_ctis"]["slack_error_url"],
+                f"Slack to ctis -> Got a fatal error",
+                traceback.format_exc().strip())

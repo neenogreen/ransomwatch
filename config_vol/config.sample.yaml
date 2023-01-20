@@ -116,6 +116,7 @@ proxy:
   password: password
 
 slack_to_ctis:
+  slack_error_url: PLACEHOLDER
   slack:
     token: PLACEHOLDER
     channel_id: PLACEHOLDER

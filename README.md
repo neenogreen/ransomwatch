@@ -102,6 +102,7 @@ In ransomwatch's config file there is a section dedicated to slack to ctis integ
 
 ```
 slack_to_ctis:
+  slack_error_url: channel url for errors
   slack:
     token: xoxb-TOKEN
     channel_id: C03XXXXXXGN # channel un which the bridge will work
