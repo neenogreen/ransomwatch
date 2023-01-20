@@ -9,6 +9,7 @@ from notifications.ctis import CTISNotification
 from notifications.slack import SlackNotification
 from db.models import Victim
 from datetime import datetime
+import os
 
 logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -44,7 +45,7 @@ def main(argv):
                 Config["slack_to_ctis"]["slack_error_url"],
                 f"Slack to ctis -> Error getting messages: {e}",
                 traceback.format_exc().strip())
-        sys.exit(1)
+        os._exit(1)
 
     for e in reversed(conversation_history):
         timestamp = float(e["ts"])
@@ -84,7 +85,7 @@ def main(argv):
                     Config["slack_to_ctis"]["slack_error_url"],
                     f"Slack to ctis -> Failed uploading to ctis: {name}",
                     traceback.format_exc().strip())
-            sys.exit(1)
+            os._exit(1)
 
     with open(Config["slack_to_ctis"]["time_path"], "w") as f:
         f.write(str(timestamp + 0.00001))
