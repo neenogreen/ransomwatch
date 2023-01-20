@@ -9,7 +9,7 @@ from .sitecrawler import SiteCrawler
 
 
 class ViceSociety(SiteCrawler):
-    actor = "ViceSociety"
+    actor = "VICE SPIDER"
 
     def scrape_victims(self):
         with Proxy() as p:
