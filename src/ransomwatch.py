@@ -123,12 +123,6 @@ def main(argv):
             # log exception
             logging.error(tb.strip())  # there is a trailing newline
 
-            # close db session
-            s.session.close()
-
-            # skip the rest of the site since the data may be messed up
-            continue
-
         logging.info(f"There are {len(s.new_victims)} new victims")
 
         # send notifications for new victims
