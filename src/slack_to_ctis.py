@@ -47,7 +47,11 @@ def main(argv):
                 traceback.format_exc().strip())
         os._exit(1)
 
+    ctis_messages = 0
+
     for e in reversed(conversation_history):
+        if timestamp >= float(e["ts"]):
+            continue
         timestamp = float(e["ts"])
         if not "New Victim Posted" in str(e):
             continue
@@ -87,8 +91,12 @@ def main(argv):
                     traceback.format_exc().strip())
             os._exit(1)
 
+        ctis_messages += 1
+
+    logging.info("{} CTIS messages sent".format(ctis_messages, channel_id))
+
     with open(Config["slack_to_ctis"]["time_path"], "w") as f:
-        f.write(str(timestamp + 0.000001))
+        f.write(str(timestamp + 0.00001))
 
 if __name__ == "__main__":
     try:
