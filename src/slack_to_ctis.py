@@ -96,7 +96,7 @@ def main(argv):
     logging.info("{} CTIS messages sent".format(ctis_messages, channel_id))
 
     with open(Config["slack_to_ctis"]["time_path"], "w") as f:
-        f.write(str(timestamp + 0.00001))
+        f.write(str(timestamp))
 
 if __name__ == "__main__":
     try:
