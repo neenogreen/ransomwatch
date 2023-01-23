@@ -23,7 +23,7 @@ logging.basicConfig(
 def main(argv):
     try:
         with open(Config["slack_to_ctis"]["time_path"], "r") as f:
-            timestamp = float(f.readline().strip("\n"))
+            timestamp = float(f.read().strip("\n"))
     except:
         with open(Config["slack_to_ctis"]["time_path"], "w") as f:
             timestamp = time.time()
