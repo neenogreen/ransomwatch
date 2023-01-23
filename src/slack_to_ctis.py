@@ -23,7 +23,7 @@ logging.basicConfig(
 def main(argv):
     try:
         with open(Config["slack_to_ctis"]["time_path"], "r") as f:
-            timestamp = float(f.readline()[:-1])
+            timestamp = float(f.readline().strip("\n"))
     except:
         with open(Config["slack_to_ctis"]["time_path"], "w") as f:
             timestamp = time.time()
@@ -88,7 +88,7 @@ def main(argv):
             os._exit(1)
 
     with open(Config["slack_to_ctis"]["time_path"], "w") as f:
-        f.write(str(timestamp + 0.00001))
+        f.write(str(timestamp + 0.000001))
 
 if __name__ == "__main__":
     try:
