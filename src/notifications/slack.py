@@ -177,6 +177,11 @@ class SlackNotification(NotificationSource):
         return SlackNotification._post_webhook(body, url)
 
     def send_error_notification(url: str, context: str, error: str, fatal: bool = False) -> bool:
+
+        err = error
+        if len(err) > 1000:
+            err = err[:1000] + "..."
+
         body = {
             "attachments": [
                 {
@@ -200,7 +205,7 @@ class SlackNotification(NotificationSource):
                             "type": "section",
                             "text": {
                                 "type": "mrkdwn",
-                                "text": f"```{error}```\nFor more details, please check the app container logs"
+                                "text": f"```{err}```\nFor more details, please check the app container logs"
                             }
                         },
                         {
