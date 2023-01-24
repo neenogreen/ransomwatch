@@ -99,8 +99,8 @@ class Kakarut(SiteCrawler):
             r = p.get(f"{self.url}", headers=self.headers, verify=False)
             pages = self.scrape_pre_and_releasing_and_get_pages(r.content.decode()) 
 
-        for i in range(1, pages + 1):
-            r = p.get(f"{self.url}/?page={i}&table=releasings", headers=self.headers, verify=False)
-            self._handle_page(r.content.decode())
+            for i in range(1, pages + 1):
+                r = p.get(f"{self.url}/?page={i}&table=releasings", headers=self.headers, verify=False)
+                self._handle_page(r.content.decode())
 
         self.site.last_scraped = datetime.utcnow()
