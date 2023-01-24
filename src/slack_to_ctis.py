@@ -62,6 +62,8 @@ def main(argv):
 
         try:
             actor = e["attachments"][0]["blocks"][1]["fields"][0]["text"].split("\n")[1]
+            if "??" in e["attachments"][0]["blocks"][1]["fields"][1]["text"] or "**" in  e["attachments"][0]["blocks"][1]["fields"][1]["text"]:
+                continue
             if "http" in e["attachments"][0]["blocks"][1]["fields"][1]["text"]:
                 name = e["attachments"][0]["blocks"][1]["fields"][1]["text"].split("\n")[1][1:].split("|")[0]
             else:
