@@ -8,8 +8,8 @@ from net.proxy import Proxy
 from .sitecrawler import SiteCrawler
 
 
-class Bianlial(SiteCrawler):
-    actor = "Bianlial"
+class Bianlian(SiteCrawler):
+    actor = "Bianlian"
 
     def __init__(self, url: str):
         super(Bianlial, self).__init__(url)

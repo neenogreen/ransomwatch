@@ -69,7 +69,7 @@ def main(argv):
         sites.Qilin,
         sites.Unsafe,
         sites.Play,
-        sites.Bianlial,
+        sites.Bianlian,
         sites.Daixin,
         sites.Relic,
         sites.RansomHouse,

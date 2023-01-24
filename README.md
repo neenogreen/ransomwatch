@@ -76,7 +76,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [ ] Qilin
 - [ ] Unsafe
 - [X] Play
-- [ ] Bianlial
+- [ ] Bianlian
 - [ ] Daixin
 - [ ] Relic
 - [ ] RansomHouse
