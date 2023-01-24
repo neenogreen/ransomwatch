@@ -12,7 +12,7 @@ class Bianlian(SiteCrawler):
     actor = "Bianlian"
 
     def __init__(self, url: str):
-        super(Bianlial, self).__init__(url)
+        super(Bianlian, self).__init__(url)
         self.headers['Host'] = self.url[7:]
         self.headers['Accept'] = 'text/css,*/*;q=0.1'
         self.headers['Accept-Encoding'] = 'gzip, deflate'
