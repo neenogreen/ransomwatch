@@ -83,6 +83,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [ ] Nokoyawa
 - [ ] Snatch
 - [ ] Kakarut
+- [ ] Free Civilian
 
 ## Leak Sites lists
 
