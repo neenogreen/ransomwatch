@@ -42,7 +42,7 @@ from .mallox import Mallox
 from .qilin import Qilin
 from .unsafe import Unsafe
 from .play import Play
-from .bianlial import Bianlian
+from .bianlian import Bianlian
 from .daixin import Daixin
 from .relic import Relic
 from .ransomhouse import RansomHouse
