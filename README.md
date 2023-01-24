@@ -82,6 +82,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [ ] RansomHouse
 - [ ] Nokoyawa
 - [ ] Snatch
+- [ ] Kakarut
 
 ## Leak Sites lists
 

@@ -48,3 +48,4 @@ from .relic import Relic
 from .ransomhouse import RansomHouse
 from .nokoyawa import Nokoyawa
 from .snatch import Snatch
+from .kakarut import Kakarut

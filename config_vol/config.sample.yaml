@@ -3,11 +3,11 @@
 sites:
   conti: http://something.onion
   revil: http://something.onion
-  ##avaddon: http://something.onion
-  ##darkside: http://something.onion
+  avaddon: http://something.onion
+  darkside: http://something.onion
   babuk: http://something.onion
-  ##ranzy: http://something.onion
-  ##astro: http://something.onion
+  ranzy: http://something.onion
+  astro: http://something.onion
   pay2key: http://something.onion
   cuba: http://something.onion
   ransomexx: http://something.onion
@@ -16,10 +16,10 @@ sites:
   ragnar: http://something.onion
   suncrypt: http://something.onion
   everest: http://something.onion
-  ##nefilim: http://something.onion
-  ##cl0p: http://something.onion
+  nefilim: http://something.onion
+  cl0p: http://something.onion
   pysa: http://something.onion
-  ##lockbit: http://something.onion
+  lockbit: http://something.onion
   xing: http://something.onion
   lorenz: http://something.onion
   elcometa: http://something.onion
@@ -52,6 +52,7 @@ sites:
   ransomhouse: http://something.onion
   nokoyawa: http://something.onion
   snatch: http://something.onion
+  kakarut: http://something.onion
 
 # slack webhooks
 notifications:
