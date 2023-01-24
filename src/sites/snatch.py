@@ -23,7 +23,8 @@ class Snatch(SiteCrawler):
 
             if q.count() == 0:
                 # new victim
-                with Proxy() as p:                    r = p.get(victim_leak_site, headers=self.headers)
+                with Proxy() as p:
+                    r = p.get(victim_leak_site, headers=self.headers)
                 soup = BeautifulSoup(r.content.decode(), "html.parser")
                 published_str = soup.find("div", class_="n-n-c-e-t-time").get_text().split("\n")[1].strip()
                 published_dt = datetime.strptime(published_str, "Created: %b %d, %Y %I:%M %p")
