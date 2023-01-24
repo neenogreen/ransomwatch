@@ -31,8 +31,6 @@ class Bianlial(SiteCrawler):
             for victim in victim_list:
                 tmp = victim.find("a")
                 victim_name = tmp.text.strip()
-                if "**" in victim_name:
-                    continue
                 victim_leak_site = self.url + tmp.attrs["href"]
 
                 q = self.session.query(Victim).filter_by(
