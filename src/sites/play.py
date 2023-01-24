@@ -18,9 +18,7 @@ class Play(SiteCrawler):
         victim_list = soup.find_all("th", class_="News")
 
         for victim in victim_list:
-            if not victim.find("h", attrs={"style": "color: #F5F5F5;"}):
-                continue
-            victim_name = victim.text.strip().split(",")[0]
+            victim_name = victim.find(text=True, recursive=False)#text.strip().split(",")[0]
             victim_leak_site = self.url + "/topic.php?id=" + victim.attrs["onclick"].split("'")[1]
 
             q = self.session.query(Victim).filter_by(
