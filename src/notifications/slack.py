@@ -137,11 +137,13 @@ class SlackNotification(NotificationSource):
 
     def send_site_down_notification(url: str, site: Site) -> bool:
         last_up_ts = datetime.strftime(site.last_up, '%b %d, %Y at %H:%M:%S UTC') if site.last_up is not None else "N/A"
+        diff = (datetime.utcnow() - site.last_up).total_seconds() / 3600 if site.last_up is not None else 0
 
         body = {
             "attachments": [
                 {
-                    "color": "#fcc203",
+                    # If the dls is down for at least 5 hours change the severity of the slack alert
+                    "color": "#fcc203" if diff < 5  else "#ff7518",
                     "blocks": [
                         {
                             "type": "header",
