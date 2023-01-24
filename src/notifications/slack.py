@@ -19,7 +19,10 @@ class SlackNotification(NotificationSource):
 
     def send_new_victim_notification(url: str, victim: Victim) -> bool:
         published_ts = datetime.strftime(victim.published, '%b %d, %Y') if victim.published is not None else "N/A"
-        description = victim.description
+        if victim.description:
+            description = victim.description
+        else:
+            description = " " 
         if len(description) > 1000:
             description = description[:1000] + "..."
 
@@ -178,7 +181,10 @@ class SlackNotification(NotificationSource):
 
     def send_error_notification(url: str, context: str, error: str, fatal: bool = False) -> bool:
 
-        err = error
+        if error:
+            err = error
+        else:
+            err = " "
         if len(err) > 1000:
             err = err[:1000] + "..."
 
