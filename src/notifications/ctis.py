@@ -107,11 +107,12 @@ class CTISNotification():
 
         return self.do_req("/identities", json_query)
 
-    def add_operation(self, name, description):
+    def add_operation(self, name, description, published):
         json_query = [
             {
                 "confidence": 100,
                 "description": description,
+                "first_seen": published,
                 "labels": ["ransomware"],
                 "name": name,
                 "x-sources": [
@@ -190,7 +191,7 @@ class CTISNotification():
         ok, intrusion_set = self.add_intrusion_set(actor)
         if not ok:
             raise Exception(f"Can't create intrusion set {actor}: {intrusion_set}")
-        ok, operation = self.add_operation(actor + " targets " + victim.name, victim.description)
+        ok, operation = self.add_operation(actor + " targets " + victim.name, victim.description, victim.published)
         if not ok:
             raise Exception(f"Can't create operation {actor} on {victim.name}: {operation}")
         ok, res = self.add_relationship("targets", operation, "x-operations", identity, "identities")
