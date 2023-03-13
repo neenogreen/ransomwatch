@@ -231,3 +231,30 @@ class SlackNotification(NotificationSource):
         }
 
         return SlackNotification._post_webhook(body, url)
+    
+    def send_info_notification(url: str, info: str) -> bool:
+        body = {
+            "attachments": [
+                {
+                    "color": "#0FFF50",
+                    "blocks": [
+                        {
+                            "type": "header",
+                            "text": {
+                                "type": "plain_text",
+                                "text": f"Info"
+                            }
+                        },
+                        {
+                            "type": "section",
+                            "text": {
+                                "type": "mrkdwn",
+                                "text": info
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+
+        return SlackNotification._post_webhook(body, url)

@@ -77,6 +77,9 @@ notifications:
     # should errors be sent to this webook?
     errors: true
 
+    # should info be sent to this webhook?
+    info: true
+
     # may in the future add support for not sending leak site links
     # if you actively want this, open an issue (or make a PR)
   dest2:
@@ -86,6 +89,7 @@ notifications:
     removed_victims: true
     down_sites: true
     errors: false
+    info: false
   dest3:
     type: ctis
     url: https://example.com
@@ -95,6 +99,7 @@ notifications:
     removed_victims: false # not implemented, useless
     down_sites: false # not implemented, useless
     errors: false # not implemented, useless
+    info: false # not implemented, useless
 
 # how many seconds to wait for a connection
 # this is used to check if the site is up, and doesn't wait

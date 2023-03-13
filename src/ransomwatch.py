@@ -79,6 +79,7 @@ def main(argv):
         sites.FreeCivilian
     ]
 
+    NotificationManager.send_info_notification(f"Starting: Found {len(sites_to_analyze)} sites")
     logging.info(f"Found {len(sites_to_analyze)} sites")
 
     with Proxy() as p:
@@ -148,6 +149,7 @@ def main(argv):
 
         logging.info(f"Finished {site.actor}")
 
+    NotificationManager.send_info_notification("Finished all sites, exiting")
     logging.info("Finished all sites, exiting")
 
 

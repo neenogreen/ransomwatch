@@ -82,3 +82,15 @@ class NotificationManager():
                         logging.error(f"Failed to send error notification to Discord guild \"{dest}\"")
                 else:
                     logging.error(f"Attempted to send a site down notification to an unsupported notification type: {params['type']}")
+
+    def send_info_notification(info: str):
+        if "notifications" in Config and Config["notifications"]:
+            for dest, params in Config["notifications"].items():
+                if not params["info"]:
+                    continue
+
+                if params["type"] == "slack":
+                    if not SlackNotification.send_info_notification(params["url"], info):
+                        logging.error(f"Failed to send info notification to Slack workspace \"{dest}\"")
+                else:
+                    logging.error(f"Attempted to send a site down notification to an unsupported notification type: {params['type']}")
