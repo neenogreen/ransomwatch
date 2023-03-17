@@ -28,7 +28,7 @@ class Cl0p(SiteCrawler):
                     continue
                 victim_leak_site = self.url + victim.find("a").attrs["href"]
                 q = self.session.query(Victim).filter_by(
-                    url=victim_leak_site, site=self.site)
+                    name=victim_name, site=self.site)
 
                 if q.count() == 0:
                     # new victim
