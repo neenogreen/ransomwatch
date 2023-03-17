@@ -3,6 +3,7 @@ import logging
 from config import Config
 from random import randint
 from time import sleep
+from copy import copy
 
 from bs4 import BeautifulSoup
 
@@ -61,7 +62,9 @@ class Lockbit(SiteCrawler):
                 v = q.first()
                 if victim.find("div", class_="post-timer-end"):
                     if v.first_seen < v.published and v.published <= datetime.utcnow():
-                        NotificationManager.send_new_victim_notification(v)
+                        tmp = copy(v)
+                        tmp.name += " - PUBLISHED"
+                        NotificationManager.send_new_victim_notification(tmp)
                         v.first_seen = v.published
                 v.last_seen = datetime.utcnow()
 
