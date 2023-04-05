@@ -12,6 +12,7 @@ In `config_vol/`, please copy `config.sample.yaml` to `config.yaml`, and add the
   * Slack: Follow [these](https://api.slack.com/messaging/webhooks) instructions to add a new app to your Slack workspace and add the webhook URL to the config.
   * Discord: Follow [these](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) instructions to add a new app to your Discord server and add the webhook URL to the config.
   * Teams: Follow [these](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook) instructions to add a new app to your Teams channel and add the webhook URL to the config.
+  * Telegram: simply create a new bot with BotFather, add it to the group in which you want to receive notifications and compile the config file
 
 Additionally, there are a few environment variables you may need to set:
 
@@ -62,7 +63,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Blackbyte
 - [X] Blackbasta
 - [X] Lorenz
-- [ ] Cl0p
+- [X] Cl0p
 - [X] ViceSociety
 - [X] Royal
 - [X] Ragnar Locker

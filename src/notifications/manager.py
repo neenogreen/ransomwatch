@@ -6,6 +6,7 @@ from .slack import SlackNotification
 from .discord import DiscordNotification
 from .teams import TeamsNotification
 from .ctis import CTISNotification
+from .telegram import TelegramNotification
 
 class NotificationManager():
     def send_new_victim_notification(victim: Victim):
@@ -27,6 +28,9 @@ class NotificationManager():
                     ctis_instance = CTISNotification(params["url"], params["username"], params["password"])
                     if not ctis_instance.send_new_victim_notification(victim):
                         logging.error(f"Failed to send new victim notification to CTIS \"{dest}\"")
+                elif params["type"] == "telegram":
+                    if not TelegramNotification.send_new_victim_notification(params["token"], params["chat_id"], victim):
+                        logging.error(f"Failed to send new victim notification to Telegram \"{dest}\"")
                 else:
                     logging.error(f"Attempted to send a new victim notification to an unsupported notification type: {params['type']}")
     
