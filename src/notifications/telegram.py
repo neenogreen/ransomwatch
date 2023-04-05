@@ -30,6 +30,7 @@ _Victim Page:_ {victim.url if victim.url is not None else "no victim link availa
 _Victim Leak Site:_ {victim.site.url}
         """
         message = message.replace("-", "\-")
+        message = message.replace("!", "\!")
         message = message.replace(".", "\.")
         message = message.replace("#", "\#")
 
