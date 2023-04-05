@@ -4,6 +4,7 @@ import requests
 from typing import Dict
 import json
 import telebot
+import time
 
 from db.models import Site, Victim
 from .source import NotificationSource
@@ -19,19 +20,18 @@ class TelegramNotification(NotificationSource):
         if len(description) > 1000:
             description = description[:1000] + "..."
 
-        message = f"""\U00002623 *_RANSOMWATCH_* \U00002623 
-*NEW VICTIM POSTED*
-_Actor:_ {victim.site.actor}
-_Organization:_ {victim.name}
-_Published Date:_ {published_ts}
-_First Seen:_ {datetime.strftime(victim.first_seen, '%b %d, %Y at %H:%M:%S UTC')}
-_Description:_ {description}
-_Victim Page:_ {victim.url if victim.url is not None else "no victim link available"}
-_Victim Leak Site:_ {victim.site.url}
+        message = f"""\U00002623 RANSOMWATCH \U00002623 
+NEW VICTIM POSTED
+Actor: {victim.site.actor}
+Organization: {victim.name}
+Published Date: {published_ts}
+First Seen: {datetime.strftime(victim.first_seen, '%b %d, %Y at %H:%M:%S UTC')}
+Description: {description}
+Victim Page: {victim.url if victim.url is not None else "no victim link available"}
+Victim Leak Site: {victim.site.url}
         """
-        message = message.replace("-", "\-")
-        message = message.replace("!", "\!")
-        message = message.replace(".", "\.")
-        message = message.replace("#", "\#")
 
-        return telebot.TeleBot(token, parse_mode='MarkdownV2').send_message(chat_id, message)
+        # Max 20 messages per minute to the same group
+        time.sleep(4)
+
+        return telebot.TeleBot(token).send_message(chat_id, message)
