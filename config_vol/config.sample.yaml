@@ -54,6 +54,7 @@ sites:
   snatch: http://something.onion
   kakarut: http://something.onion
   free civilian: http://something.onion
+  monti: http://something.onion
 
 # slack webhooks
 notifications:
@@ -114,6 +115,9 @@ notifications:
 # this is used to check if the site is up, and doesn't wait
 # for the full page data to be downloaded
 timeout: 30
+
+# 2captcha api key
+2captcha_key: XXXXX
 
 # tor proxy settings
 # the values set below are for the provided docker-compose.yml

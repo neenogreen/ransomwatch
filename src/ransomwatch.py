@@ -76,7 +76,8 @@ def main(argv):
         sites.Nokoyawa,
         sites.Snatch,
         sites.Kakarut,
-        sites.FreeCivilian
+        sites.FreeCivilian,
+        sites.Monti
     ]
 
     NotificationManager.send_info_notification(f"Starting: Found {len(sites_to_analyze)} sites")
