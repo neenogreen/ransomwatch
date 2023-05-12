@@ -68,23 +68,23 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Royal
 - [X] Ragnar Locker
 - [X] Babuk
-- [ ] Blacktor
+- [X] Blacktor
 - [X] Dark Leak Market
 - [X] Quantum
 - [X] DataLeak
-- [ ] 0mega
-- [ ] Mallox
-- [ ] Qilin
-- [ ] Unsafe
+- [X] 0mega
+- [X] Mallox
+- [X] Qilin
+- [X] Unsafe
 - [X] Play
 - [X] Bianlian
-- [ ] Daixin
-- [ ] Relic
-- [ ] RansomHouse
-- [ ] Nokoyawa
-- [ ] Snatch
-- [ ] Kakarut
-- [ ] Free Civilian
+- [X] Daixin
+- [X] Relic
+- [X] RansomHouse
+- [X] Nokoyawa
+- [X] Snatch
+- [X] Kakarut
+- [X] Free Civilian
 - [X] Monti
 
 ## Leak Sites lists

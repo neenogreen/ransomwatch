@@ -27,6 +27,9 @@ class RansomHouse(SiteCrawler):
             q = self.session.query(Victim).filter_by(
                     site=self.site, url=victim_leak_site)
 
+            if "published" not in victim.keys():
+                continue
+
             if q.count() == 0:
                 victim_description = "Website: " + victim["url"] + "\n"
                 victim_description += "Revenue: " + victim["revenue"] + "\n"
