@@ -221,7 +221,7 @@ class SlackNotification(NotificationSource):
                             "elements": [
                                 {
                                     "type": "mrkdwn",
-                                    "text": "If you think this is a bug, please <https://github.com/captainGeech42/ransomwatch/issues|open an issue> on GitHub"
+                                    "text": "If you think this is a bug, please <https://github.com/neenogreen/ransomwatch/issues|open an issue> on GitHub"
                                 }
                             ]
                         }
