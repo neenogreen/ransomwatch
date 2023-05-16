@@ -10,3 +10,4 @@ SQLAlchemy
 stem
 pyTelegramBotAPI
 lxml
+captcha-solver

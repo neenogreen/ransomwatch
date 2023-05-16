@@ -8,6 +8,7 @@ from stem.control import Controller
 from stem.util.log import get_logger
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
@@ -105,17 +106,8 @@ class HeadlessBrowser:
     def get(self, *args, **kwargs):
         self.DRIVER.get(*args, **kwargs)
 
-    def post(self, *args, **kwargs):
-        self.DRIVER.post(*args, **kwargs)
+    def find_element_by_class(self, name):
+        return self.DRIVER.find_element(By.CLASS_NAME, name)
 
-    def put(self, *args, **kwargs):
-        self.DRIVER.put(*args, **kwargs)
-
-    def patch(self, *args, **kwargs):
-        self.DRIVER.patch(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        self.DRIVER.delete(*args, **kwargs)
-
-    def head(self, *args, **kwargs):
-        self.DRIVER.head(*args, **kwargs)
+    def find_element_by_name(self, name):
+        return self.DRIVER.find_element(By.NAME, name)
