@@ -61,14 +61,17 @@ class Cl0p(SiteCrawler):
 
     def scrape_victims(self):
         with HeadlessBrowser() as browser:
-            browser.get(self.url)
-            sleep(20)
             for i in range(5):
+                browser.get(self.url)
+                sleep(20)
                 soup = BeautifulSoup(browser.res(), "html.parser")
-                captcha = base64.b64decode(soup.find("div", class_="captchav2").find("div")["style"].split("base64,")[1][:-2])
-                captcha = CaptchaSolver('2captcha', api_key=Config["2captcha_key"]).solve_captcha(captcha)
-                browser.find_element_by_name("cap").send_keys(captcha)
-                browser.find_element_by_class("before").click()
+                try:
+                    captcha = base64.b64decode(soup.find("div", class_="captchav2").find("div")["style"].split("base64,")[1][:-2])
+                    captcha = CaptchaSolver('2captcha', api_key=Config["2captcha_key"]).solve_captcha(captcha)
+                    browser.find_element_by_name("cap").send_keys(captcha)
+                    browser.find_element_by_class("before").click()
+                except:
+                    continue
                 sleep(10)
                 browser.res()
                 try:
