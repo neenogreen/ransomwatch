@@ -84,7 +84,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] RansomHouse
 - [X] Nokoyawa
 - [X] Snatch
-- [X] Kakarut
+- [X] Karakurt
 - [X] Free Civilian
 - [X] Monti
 

@@ -10,8 +10,8 @@ from .sitecrawler import SiteCrawler
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from requests.packages.urllib3 import disable_warnings
 
-class Kakarut(SiteCrawler):
-    actor = "Kakarut"
+class Karakurt(SiteCrawler):
+    actor = "Karakurt"
 
     def is_site_up(self) -> bool:
         disable_warnings(InsecureRequestWarning)

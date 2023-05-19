@@ -75,7 +75,7 @@ def main(argv):
         sites.RansomHouse,
         sites.Nokoyawa,
         sites.Snatch,
-        sites.Kakarut,
+        sites.Karakurt,
         sites.FreeCivilian,
         sites.Monti
     ]
