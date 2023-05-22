@@ -72,7 +72,7 @@ class Cl0p(SiteCrawler):
                     browser.find_element_by_class("before").click()
                 except:
                     continue
-                sleep(10)
+                sleep(20)
                 browser.res()
                 try:
                     browser.find_element_by_name("cap")
