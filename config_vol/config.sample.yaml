@@ -55,6 +55,7 @@ sites:
   karakurt: http://something.onion
   free civilian: http://something.onion
   monti: http://something.onion
+  moneymessage: http://something.onion
 
 # slack webhooks
 notifications:

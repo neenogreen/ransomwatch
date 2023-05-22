@@ -87,6 +87,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Karakurt
 - [X] Free Civilian
 - [X] Monti
+- [X] MoneyMessage
 
 ## Leak Sites lists
 

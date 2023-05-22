@@ -51,3 +51,4 @@ from .snatch import Snatch
 from .karakurt import Karakurt
 from .freecivilian import FreeCivilian
 from .monti import Monti
+from .moneymessage import MoneyMessage
