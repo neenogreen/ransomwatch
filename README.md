@@ -88,6 +88,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Free Civilian
 - [X] Monti
 - [X] MoneyMessage
+- [X] 8base
 
 ## Leak Sites lists
 
