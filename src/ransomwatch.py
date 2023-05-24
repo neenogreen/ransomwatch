@@ -79,7 +79,8 @@ def main(argv):
         sites.FreeCivilian,
         sites.Monti,
         sites.MoneyMessage,
-        sites.Eightbase
+        sites.Eightbase,
+        sites.Donut
     ]
 
     NotificationManager.send_info_notification(f"Starting: Found {len(sites_to_analyze)} sites")

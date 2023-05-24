@@ -57,6 +57,7 @@ sites:
   monti: http://something.onion
   moneymessage: http://something.onion
   8base: http://something.onion
+  donut: http://something.onion
 
 # slack webhooks
 notifications:

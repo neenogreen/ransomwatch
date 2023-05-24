@@ -60,7 +60,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Cuba
 - [X] RansomEXX
 - [X] Lockbit
-- [X] Hive
+- [] Hive
 - [X] Blackbyte
 - [X] Blackbasta
 - [X] Lorenz
@@ -89,6 +89,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Monti
 - [X] MoneyMessage
 - [X] 8base
+- [X] Donut
 
 ## Leak Sites lists
 

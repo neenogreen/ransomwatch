@@ -53,3 +53,4 @@ from .freecivilian import FreeCivilian
 from .monti import Monti
 from .moneymessage import MoneyMessage
 from .eightbase import Eightbase
+from .donut import Donut
