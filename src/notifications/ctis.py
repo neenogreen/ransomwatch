@@ -192,7 +192,7 @@ class CTISNotification():
         ok, intrusion_set = self.add_intrusion_set(actor)
         if not ok:
             raise Exception(f"Can't create intrusion set {actor}: {intrusion_set}")
-        ok, operation = self.add_operation(actor + " targets " + victim.name, victim.description, vitctim.published, victim.first_seen)
+        ok, operation = self.add_operation(actor + " targets " + victim.name, victim.description, victim.published, victim.first_seen)
         if not ok:
             raise Exception(f"Can't create operation {actor} on {victim.name}: {operation}")
         ok, res = self.add_relationship("targets", operation, "x-operations", identity, "identities")
