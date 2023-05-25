@@ -91,6 +91,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] 8base
 - [X] Donut
 - [X] Akira
+- [X] Abyss
 
 ## Leak Sites lists
 

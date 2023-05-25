@@ -55,3 +55,4 @@ from .moneymessage import MoneyMessage
 from .eightbase import Eightbase
 from .donut import Donut
 from .akira import Akira
+from .abyss import Abyss

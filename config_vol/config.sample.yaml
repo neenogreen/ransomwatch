@@ -59,6 +59,7 @@ sites:
   8base: http://something.onion
   donut: http://something.onion
   akira: http://something.onion
+  abyss: http://something.onion
 
 # slack webhooks
 notifications:
