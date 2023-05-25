@@ -112,7 +112,7 @@ class CTISNotification():
         json_query = [
             {
                 "confidence": 100,
-                "description": description,
+                "description": description.replace('\n', '\r\n'),
                 "first_seen": str(first_seen) + "Z",
                 "labels": ["ransomware"],
                 "name": name,
@@ -156,7 +156,7 @@ class CTISNotification():
                 "entity_type": "report",
                 "labels": ["dls"],
                 "title": name,
-                "message": message,
+                "message": message.replace('\n', '\r\n'),
                 "from": "ransomwatch",
                 "alert_type": "x-operations",
                 "role": "analyst",
