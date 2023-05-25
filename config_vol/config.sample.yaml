@@ -58,6 +58,7 @@ sites:
   moneymessage: http://something.onion
   8base: http://something.onion
   donut: http://something.onion
+  akira: http://something.onion
 
 # slack webhooks
 notifications:

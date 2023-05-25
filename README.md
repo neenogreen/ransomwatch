@@ -90,6 +90,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] MoneyMessage
 - [X] 8base
 - [X] Donut
+- [X] Akira
 
 ## Leak Sites lists
 
