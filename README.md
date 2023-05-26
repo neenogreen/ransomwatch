@@ -93,6 +93,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Akira
 - [X] Abyss
 - [X] Cryptnet
+- [X] Malas
 
 ## Leak Sites lists
 

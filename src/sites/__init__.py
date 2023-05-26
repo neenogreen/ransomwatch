@@ -57,3 +57,4 @@ from .donut import Donut
 from .akira import Akira
 from .abyss import Abyss
 from .cryptnet import Cryptnet
+from .malas import Malas

@@ -83,7 +83,8 @@ def main(argv):
         sites.Donut,
         sites.Akira,
         sites.Abyss,
-        sites.Cryptnet
+        sites.Cryptnet,
+        sites.Malas
     ]
 
     NotificationManager.send_info_notification(f"Starting: Found {len(sites_to_analyze)} sites")
