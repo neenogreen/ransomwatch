@@ -96,6 +96,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Malas
 - [X] Rancoz
 - [X] Ra Group
+- [X] Medusa
 
 ## Leak Sites lists
 
