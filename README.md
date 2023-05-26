@@ -97,6 +97,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Rancoz
 - [X] Ra Group
 - [X] Medusa
+- [X] BlackSuit
 
 ## Leak Sites lists
 

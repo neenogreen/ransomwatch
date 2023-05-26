@@ -66,6 +66,7 @@ sites:
   rancoz: http://something.onion
   ra group: http://something.onion
   medusa: http://something.onion
+  blacksuit: http://something.onion
 
 # slack webhooks
 notifications:

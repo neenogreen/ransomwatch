@@ -61,3 +61,4 @@ from .malas import Malas
 from .rancoz import Rancoz
 from .ragroup import RaGroup
 from .medusa import Medusa
+from .blacksuit import BlackSuit
