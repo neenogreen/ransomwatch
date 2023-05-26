@@ -60,6 +60,7 @@ sites:
   donut: http://something.onion
   akira: http://something.onion
   abyss: http://something.onion
+  cryptnet: http://something.onion
 
 # slack webhooks
 notifications:
