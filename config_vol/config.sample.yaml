@@ -62,6 +62,7 @@ sites:
   abyss: http://something.onion
   cryptnet: http://something.onion
   malas: http://something.onion
+  rancoz: http://something.onion
 
 # slack webhooks
 notifications:
