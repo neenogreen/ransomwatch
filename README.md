@@ -98,6 +98,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Ra Group
 - [X] Medusa
 - [X] BlackSuit
+- [X] Vendetta
 
 ## Leak Sites lists
 
