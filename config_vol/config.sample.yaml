@@ -50,6 +50,7 @@ sites:
   daixin: http://something.onion
   relic: http://something.onion
   ransomhouse: http://something.onion
+  # this has to be their API url
   nokoyawa: http://something.onion
   snatch: http://something.onion
   karakurt: http://something.onion
