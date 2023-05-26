@@ -26,7 +26,7 @@ class Rancoz(SiteCrawler):
 
             if q.count() == 0:
                 # new victim
-                v = Victim(name=victim_name, url=victim_leak_site, published=datetime.utcnow(), description=description,
+                v = Victim(name=victim_name, url=victim_leak_site, published=published, description=description,
                             first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
                 self.new_victims.append(v)
