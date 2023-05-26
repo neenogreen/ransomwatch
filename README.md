@@ -95,6 +95,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Cryptnet
 - [X] Malas
 - [X] Rancoz
+- [X] Ra Group
 
 ## Leak Sites lists
 

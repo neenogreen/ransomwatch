@@ -63,6 +63,7 @@ sites:
   cryptnet: http://something.onion
   malas: http://something.onion
   rancoz: http://something.onion
+  ra group: http://something.onion
 
 # slack webhooks
 notifications:
