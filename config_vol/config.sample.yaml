@@ -70,6 +70,7 @@ sites:
   vendetta: http://something.onion
   dunghill: http://something.onion
   trigona: http://something.onion
+  ransomwareblog: http://something.onion
 
 # slack webhooks
 notifications:
