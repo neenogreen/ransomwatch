@@ -12,7 +12,7 @@ class RaGroup(SiteCrawler):
 
     def _handle_page(self, body: str):
         soup = BeautifulSoup(body, "html.parser")
-        victim_name = soup.find("h1").text.strip()
+        victim_name = re.split("\(([^\)]+)\)", soup.find("h1").text.strip())[0].strip()
         victim_leak_site = soup.find("meta", property="og:url")["content"]
         description = soup.find("div", class_="post-content markdown-body").get_text()
         published = datetime.strptime(soup.find("time", class_="post-date")["datetime"], "%Y-%m-%d %H:%M:%S PDT")
