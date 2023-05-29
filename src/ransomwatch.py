@@ -89,7 +89,8 @@ def main(argv):
         sites.RaGroup,
         sites.Medusa,
         sites.BlackSuit,
-        sites.Vendetta
+        sites.Vendetta,
+        sites.Dunghill
     ]
 
     NotificationManager.send_info_notification(f"Starting: Found {len(sites_to_analyze)} sites")

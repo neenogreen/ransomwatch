@@ -99,6 +99,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Medusa
 - [X] BlackSuit
 - [X] Vendetta
+- [X] Dunghill
 
 ## Leak Sites lists
 

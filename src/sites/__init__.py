@@ -63,3 +63,4 @@ from .ragroup import RaGroup
 from .medusa import Medusa
 from .blacksuit import BlackSuit
 from .vendetta import Vendetta
+from .dunghill import Dunghill

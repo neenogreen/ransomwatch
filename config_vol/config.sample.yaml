@@ -68,6 +68,7 @@ sites:
   medusa: http://something.onion
   blacksuit: http://something.onion
   vendetta: http://something.onion
+  dunghill: http://something.onion
 
 # slack webhooks
 notifications:
