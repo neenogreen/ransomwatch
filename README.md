@@ -100,6 +100,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] BlackSuit
 - [X] Vendetta
 - [X] Dunghill
+- [X] Trigona
 
 ## Leak Sites lists
 

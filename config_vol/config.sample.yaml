@@ -69,6 +69,7 @@ sites:
   blacksuit: http://something.onion
   vendetta: http://something.onion
   dunghill: http://something.onion
+  trigona: http://something.onion
 
 # slack webhooks
 notifications:
