@@ -79,4 +79,4 @@ class Cl0p(SiteCrawler):
                 except:
                     self._handle_page(browser)
                     break
-            if i == 5: NotificationManager.send_error_notification("Cl0p error", "Cl0p failed in solving captcah 5 times in a row")
+            if i == 5: NotificationManager.send_error_notification("Cl0p error", "Cl0p failed in solving captcha 5 times in a row")
