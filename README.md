@@ -102,6 +102,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Dunghill
 - [X] Trigona
 - [X] RansomwareBlog
+- [X] AvosLocker
 
 ## Leak Sites lists
 

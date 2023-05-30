@@ -11,6 +11,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.support.ui import Select
 
 from config import Config
 
@@ -109,5 +110,14 @@ class HeadlessBrowser:
     def find_element_by_class(self, name):
         return self.DRIVER.find_element(By.CLASS_NAME, name)
 
+    def find_elements_by_class(self, name):
+        return self.DRIVER.find_elements(By.CLASS_NAME, name)
+
     def find_element_by_name(self, name):
         return self.DRIVER.find_element(By.NAME, name)
+
+    def find_elements_by_name(self, name):
+        return self.DRIVER.find_elements(By.NAME, name)
+
+    def select(self, elem):
+        return Select(elem)
