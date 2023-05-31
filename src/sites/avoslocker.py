@@ -48,8 +48,7 @@ class Avoslocker(SiteCrawler):
         with HeadlessBrowser() as browser:
             for i in range(5):
                 browser.get(self.url)
-                while "Prove that you are human" not in browser.res():
-                    sleep(1)
+                sleep(20)
                 try:
                     soup = BeautifulSoup(browser.res(), "html.parser")
                     captcha = base64.b64decode(soup.find("div", class_="captchav2").find("div")["style"].split("base64,")[1][:-2])
