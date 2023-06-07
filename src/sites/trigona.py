@@ -12,15 +12,11 @@ class Trigona(SiteCrawler):
 
     def _handle_page(self, body: str):
         soup = BeautifulSoup(body, "html.parser")
-        victim_list = soup.find("div", class_="auction-list__wrapper").find_all("div")
+        victim_list = soup.find("div", class_="grid").find_all("a")
 
         for victim in victim_list:
-            try:
-                tmp = victim.find("div", class_="auction-item-info__title").find("a")
-            except:
-                continue
-            victim_name = tmp.text.strip()
-            victim_leak_site = self.url + tmp["href"]
+            victim_name = victim.find("div", class_="grid-caption__title").text.strip()
+            victim_leak_site = self.url + victim["href"]
 
             q = self.session.query(Victim).filter_by(
                 url=victim_leak_site, site=self.site)
@@ -49,10 +45,6 @@ class Trigona(SiteCrawler):
 
     def scrape_victims(self):
         with Proxy() as p:
-            i = 1
-            while True:
-                r = p.get(f"{self.url}/?page={i}", headers=self.headers)
-                if len(BeautifulSoup(r.content.decode(), "html.parser").find("div", class_="auction-list__wrapper").findChildren()) == 0: break
-                self._handle_page(r.content.decode()) 
-                i = i + 1
+            r = p.get(self.url, headers=self.headers)
+            self._handle_page(r.content.decode()) 
         self.site.last_scraped = datetime.utcnow()
