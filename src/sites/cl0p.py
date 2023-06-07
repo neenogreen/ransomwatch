@@ -21,7 +21,6 @@ class Cl0p(SiteCrawler):
 
         victim_list = soup.find_all("a", class_="g-menu-item-container")
         for victim in victim_list:
-            print(victim)
             try:
                 victim_name = victim.find("span", class_="g-menu-item-title").text.strip()
             except:
