@@ -19,16 +19,16 @@ class Cl0p(SiteCrawler):
     def _handle_page(self, browser):
         soup = BeautifulSoup(browser.res(), "html.parser")
 
-        # get max page number
-        victim_list = soup.find("ul", class_="g-toplevel").find_all("li", class_="g-menu-item")
-        victim_list.extend(soup.find("ul", class_="g-toplevel").find("li", class_="g-menu-item-archive").find("ul", class_="g-sublevel").find_all("li")[1:])
-        victim_list.extend(soup.find("ul", class_="g-toplevel").find("li", class_="g-menu-item-archive2").find("ul", class_="g-sublevel").find_all("li")[1:])
-        victim_list.extend(soup.find("ul", class_="g-toplevel").find("li", class_="g-menu-item-archive3").find("ul", class_="g-sublevel").find_all("li")[1:])
+        victim_list = soup.find_all("a", class_="g-menu-item-container")
         for victim in victim_list:
-            victim_name = victim.find("span", class_="g-menu-item-title").text.strip()
-            if victim_name in ("HOME", "HOW TO DOWNLOAD?", "ARCHIVE", "ARCHIVE2", "ARCHIVE3"):
+            print(victim)
+            try:
+                victim_name = victim.find("span", class_="g-menu-item-title").text.strip()
+            except:
                 continue
-            victim_leak_site = self.url + victim.find("a").attrs["href"]
+            if any(map(victim_name.__contains__, ("HOME", "HOW TO DOWNLOAD?", "ARCHIVE"))):
+                continue
+            victim_leak_site = self.url + victim["href"]
             q = self.session.query(Victim).filter_by(
                 name=victim_name, site=self.site)
 
@@ -37,9 +37,12 @@ class Cl0p(SiteCrawler):
                 r = browser.get(victim_leak_site)
                 soup1 = BeautifulSoup(browser.res(), "html.parser")
 
-                description = soup1.find("p").text.strip()
-                if "Due to the fact that the Tor network is abandoning the second version and all domains will be abolished in September or October, we are moving to a new address" in description:
-                    description = soup1.find_all("p")[1].text.strip()
+                try:
+                    description = soup1.find("p").text.strip()
+                    if "Due to the fact that the Tor network is abandoning the second version and all domains will be abolished in September or October, we are moving to a new address" in description:
+                        description = soup1.find_all("p")[1].text.strip()
+                except:
+                    description = ""
                 
                 v = Victim(name=victim_name, url=victim_leak_site,
                         description=description,
