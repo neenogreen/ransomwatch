@@ -21,8 +21,11 @@ class BlackSuit(SiteCrawler):
             tmp = victim.find("div", class_="url")
             description = tmp.get_text() + ": " + tmp.find("a")["href"] + "\n"
             description += victim.find("div", class_="text").get_text() + "\n"
-            for link in victim.find("div", class_="links").find_all("a"):
-                description += link.text.strip() + ": " + link["href"] + "\n"
+            try:
+                for link in victim.find("div", class_="links").find_all("a"):
+                    description += link.text.strip() + ": " + link["href"] + "\n"
+            except:
+                pass
             
             q = self.session.query(Victim).filter_by(
                 name=victim_name, url=victim_url, site=self.site)
