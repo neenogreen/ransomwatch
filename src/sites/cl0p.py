@@ -54,7 +54,10 @@ class Cl0p(SiteCrawler):
                 self.new_victims.append(v)
             else:
                 # already seen, update last_seen
-                v = q.first()
+                if q2.count() == 0:
+                    v = q2.first()
+                else:
+                    v = q1.first()
                 v.last_seen = datetime.utcnow()
 
             # add the org to our seen list
