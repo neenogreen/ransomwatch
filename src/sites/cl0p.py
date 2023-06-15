@@ -28,10 +28,12 @@ class Cl0p(SiteCrawler):
             if any(map(victim_name.__contains__, ("HOME", "HOW TO DOWNLOAD?", "ARCHIVE"))):
                 continue
             victim_leak_site = self.url + victim["href"]
-            q = self.session.query(Victim).filter_by(
-                name=victim_name, site=self.site)
+            q1 = self.session.query(Victim).filter_by(
+                name=victim_name)
+            q2 = self.session.query(Victim).filter_by(
+                site=self.site)
 
-            if q.count() == 0:
+            if q1.count() == 0 and q2.count() == 0:
                 # new victim
                 r = browser.get(victim_leak_site)
                 soup1 = BeautifulSoup(browser.res(), "html.parser")
