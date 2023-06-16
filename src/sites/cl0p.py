@@ -28,12 +28,10 @@ class Cl0p(SiteCrawler):
             if any(map(victim_name.__contains__, ("HOME", "HOW TO DOWNLOAD?", "ARCHIVE"))):
                 continue
             victim_leak_site = self.url + victim["href"]
-            q1 = self.session.query(Victim).filter_by(
+            q = self.session.query(Victim).filter_by(
                 name=victim_name)
-            q2 = self.session.query(Victim).filter_by(
-                site=self.site)
 
-            if q1.count() == 0 and q2.count() == 0:
+            if q.count() == 0:
                 # new victim
                 r = browser.get(victim_leak_site)
                 soup1 = BeautifulSoup(browser.res(), "html.parser")
@@ -54,10 +52,7 @@ class Cl0p(SiteCrawler):
                 self.new_victims.append(v)
             else:
                 # already seen, update last_seen
-                if q2.count() == 0:
-                    v = q2.first()
-                else:
-                    v = q1.first()
+                v = q.first()
                 v.last_seen = datetime.utcnow()
 
             # add the org to our seen list
