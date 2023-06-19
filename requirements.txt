@@ -11,3 +11,4 @@ stem
 pyTelegramBotAPI
 lxml
 captcha-solver
+html2text
