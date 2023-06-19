@@ -4,7 +4,7 @@ feedparser
 python_dateutil
 PyYAML
 requests
-selenium
+selenium==4.9.1
 slack_sdk
 SQLAlchemy
 stem
