@@ -39,19 +39,19 @@ class Blackbasta(SiteCrawler):
         while True:
             soup = BeautifulSoup(browser.res(), "html.parser")
 
-            victim_list = soup.find_all("div", class_=['card'])
+            victim_list = soup.find_all("div", class_="card")
 
             for victim in victim_list:
-                tmp = victim.find("a", class_="blog_name_link")
-                victim_name = tmp.text.strip()
-                victim_leak_site = tmp["href"]
+                tmp = victim.find("div", class_="title")
+                victim_name = tmp.get_text().strip()
+                victim_leak_site = tmp.find("a")["href"]
                 
                 q = self.session.query(Victim).filter_by(
                     url=victim_leak_site, site=self.site)
 
                 if q.count() == 0:
                     # new victim
-                    description = victim.find("div", class_="vuepress-markdown-body").get_text().strip()
+                    description = victim.find("div", class_="v-md-editor-preview").get_text().strip()
                     v = Victim(name=victim_name, description=description, url=victim_leak_site, published=datetime.utcnow(), first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                     self.session.add(v)
                     self.new_victims.append(v)
