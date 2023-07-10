@@ -7,6 +7,8 @@ from db.models import Victim
 from net.proxy import Proxy
 from .sitecrawler import SiteCrawler
 
+import string
+import random
 
 class Mallox(SiteCrawler):
     actor = "Mallox"
@@ -20,11 +22,21 @@ class Mallox(SiteCrawler):
             victim_list = soup.find_all("div", class_="card-body")
 
             for victim in victim_list:
-                victim_name = victim.find("h5", class_="card-title").text.strip()
-                victim_leak_site = self.url + victim.find("a").attrs["href"]
+                victim_name = victim.find("h4", class_="card-title").text.strip()
+                try:
+                    victim_leak_site = self.url + victim.find("a").attrs["href"]
+                except:
+                    victim_leak_site = None
 
-                q = self.session.query(Victim).filter_by(
-                    url=victim_leak_site, site=self.site)
+                if not victim_leak_site:
+                    q = self.session.query(Victim).filter_by(
+                        name=victim_name, site=self.site)
+                    victim_leak_site = ''.join(random.choices(string.ascii_lowercase +
+                                                     string.digits, k=16))
+                else:
+                    q = self.session.query(Victim).filter_by(
+                        url=victim_leak_site, site=self.site)
+
 
                 if q.count() == 0:
                     # new victim
