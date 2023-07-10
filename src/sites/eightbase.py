@@ -19,7 +19,10 @@ class Eightbase(SiteCrawler):
             victim_name = link_and_name.text.strip()
             victim_leak_site = link_and_name["href"]
             published = victim.find("div", class_="d-flex gap-2 small mt-1 opacity-25").find_all("div")[1].text.strip()
-            published = datetime.strptime(published, "Publish: %d.%m.%Y")
+            try:
+                published = datetime.strptime(published, "Publish: %d.%m.%Y")
+            except:
+                published = datetime.strptime(published, "Publish: %d.%m.%y")
             description = ""
             for desc in victim.find_all("div", class_="small opacity-50"):
                 description += desc.text.strip() + "\n"
