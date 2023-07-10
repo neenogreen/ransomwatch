@@ -12,20 +12,21 @@ class Donut(SiteCrawler):
 
     def _handle_page(self, body: str):
         soup = BeautifulSoup(body, "html.parser")
-        victim_list = soup.find_all("tr")[1:-1]
+        victim_list = soup.find_all("article")
 
         for victim in victim_list:
-            elems = victim.find_all("td")
-            victim_name = elems[0].text.strip()
-            if "index.php" in victim_name: continue
-            victim_leak_site = elems[3].find("a")["href"]
+            tmp = victim.find("h2")
+            victim_name = tmp.get_text().strip()
+            victim_leak_site = self.url + tmp.find("a")["href"]
 
             q = self.session.query(Victim).filter_by(name=victim_name,
                 url=victim_leak_site, site=self.site)
 
             if q.count() == 0:
                 # new victim
-                v = Victim(name=victim_name, url=victim_leak_site, published=datetime.utcnow(),
+                published = datetime.strptime(victim.find("span", class_="post-meta").find("time")["datetime"], "%d-%m-%Y")
+                description = victim.find("p", class_="post-excerpt").get_text().strip()
+                v = Victim(name=victim_name, url=victim_leak_site, published=published, description=description,
                             first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
                 self.new_victims.append(v)
@@ -41,6 +42,11 @@ class Donut(SiteCrawler):
 
     def scrape_victims(self):
         with Proxy() as p:
-            r = p.get(f"{self.url}", headers=self.headers)
-            self._handle_page(r.content.decode()) 
+            page = 1
+            while True:
+                r = p.get(f"{self.url}/page/{page}", headers=self.headers)
+                if r.status_code == 404:
+                    break
+                self._handle_page(r.content.decode()) 
+                page += 1
         self.site.last_scraped = datetime.utcnow()
