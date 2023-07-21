@@ -66,3 +66,4 @@ from .vendetta import Vendetta
 from .dunghill import Dunghill
 from .trigona import Trigona
 from .ransomwareblog import RansomwareBlog
+from .cactus import Cactus
