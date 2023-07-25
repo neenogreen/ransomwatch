@@ -44,16 +44,19 @@ class MoneyMessage(SiteCrawler):
         victim = soup.find("div", class_=['MuiBox-root css-0'])
 
         name = victim.find("h5").text
+
+        pub = victim.find("p").text
+        if "update" in pub: return True
         try:
             try:
-                published = datetime.strptime(victim.find("p").text, "%m.%d.%Y")
+                published = datetime.strptime(pub, "%m.%d.%Y")
             except:
-                published = datetime.strptime(victim.find("p").text, "%d.%m.%Y")
+                published = datetime.strptime(pub, "%d.%m.%Y")
         except:
             try:
-                published = datetime.strptime(victim.find("p").text, "%m-%d-%Y")
+                published = datetime.strptime(pub, "%m-%d-%Y")
             except:
-                published = datetime.strptime(victim.find("p").text, "%d-%m-%Y")
+                published = datetime.strptime(pub, "%d-%m-%Y")
         description = ""
         for e in victim.findAll("p", text=True):
             description += e.text + "\n"
