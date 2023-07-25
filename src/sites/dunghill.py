@@ -12,41 +12,34 @@ class Dunghill(SiteCrawler):
 
     def _handle_page(self, body: str):
         soup = BeautifulSoup(body, "html.parser")
+        victims = soup.find_all("div", class_="custom-container")
 
-        victim_name = soup.find("div", class_="block-heading pt-4 mt-5").text.strip()
-        published = soup.find("div", class_="block__details-count cur_date_block").text.strip().replace("a.m.", "AM").replace("p.m.", "PM")
-        published_dt = datetime.strptime(published, "%B %d, %Y, %I:%M %p")
-        description = re.sub('PREVIOUS LOT:.*\n', '', soup.get_text().strip()) # remove noise
-        description = re.sub(r'\n+', '', description) # remove newlines
+        for victim in victims:
+            victim_name = victim.find("div", class_="ibody_title").text.strip()
+            published = victim.find("div", class_="ibody_ft_left").find("p").text.strip()
+            published_dt = datetime.strptime(published, "Date: %d.%m.%Y")
+            description = victim.find("div", "ibody_body").get_text().strip()
 
-        q = self.session.query(Victim).filter_by(
-            name=victim_name, site=self.site)
+            q = self.session.query(Victim).filter_by(
+                name=victim_name, site=self.site)
 
-        if q.count() == 0:
-            # new victim
-            v = Victim(name=victim_name, published=published_dt, description=description,
-                        first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
-            self.session.add(v)
-            self.new_victims.append(v)
-        else:
-            # already seen, update last_seen
-            v = q.first()
-            v.last_seen = datetime.utcnow()
+            if q.count() == 0:
+                # new victim
+                v = Victim(name=victim_name, published=published_dt, description=description,
+                            first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
+                self.session.add(v)
+                self.new_victims.append(v)
+            else:
+                # already seen, update last_seen
+                v = q.first()
+                v.last_seen = datetime.utcnow()
 
-        # add the org to our seen list
-        self.current_victims.append(v)
+            # add the org to our seen list
+            self.current_victims.append(v)
         self.session.commit()
 
     def scrape_victims(self):
         with Proxy() as p:
-            i = 1
-            while True:
-                if i == 1:
-                    r = p.get(f"{self.url}", headers=self.headers)
-                else:
-                    r = p.get(f"{self.url}/index{i}.html", headers=self.headers)
-                if r.status_code == 404:
-                    break
-                self._handle_page(r.content.decode())
-                i = i + 1
+            r = p.get(f"{self.url}", headers=self.headers)
+            self._handle_page(r.content.decode())
         self.site.last_scraped = datetime.utcnow()
