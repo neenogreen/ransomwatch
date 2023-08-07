@@ -93,7 +93,8 @@ def main(argv):
         sites.Dunghill,
         sites.Trigona,
         sites.RansomwareBlog,
-        sites.Cactus
+        sites.Cactus,
+        sites.Rhysida
     ]
 
     NotificationManager.send_info_notification(f"Starting: Found {len(sites_to_analyze)} sites")

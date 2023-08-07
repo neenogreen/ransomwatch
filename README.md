@@ -104,6 +104,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] RansomwareBlog
 - [X] AvosLocker
 - [X] Cactus
+- [X] Rhysida
 
 ## Leak Sites lists
 

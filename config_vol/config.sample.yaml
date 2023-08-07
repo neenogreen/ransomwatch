@@ -71,6 +71,8 @@ sites:
   dunghill: http://something.onion
   trigona: http://something.onion
   ransomwareblog: http://something.onion
+  cactus: http://something.onion
+  rhysida: http://something.onion
 
 # slack webhooks
 notifications:
