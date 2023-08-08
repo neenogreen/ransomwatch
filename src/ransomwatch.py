@@ -151,6 +151,12 @@ def main(argv):
             logging.info("Notifying for new victims")
             for v in s.new_victims:
                 NotificationManager.send_new_victim_notification(v)
+        elif s.first_run and len(s.new_victims) > 0 and s.init_scrape:
+            # send notifications for old victims 
+            logging.info("Notifying for old victims")
+            for v in s.new_victims:
+                v.first_seen = v.published
+                NotificationManager.send_new_victim_notification(v)
 
         logging.info(f"Identifying removed victims")
         removed = s.identify_removed_victims()

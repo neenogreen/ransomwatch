@@ -33,6 +33,7 @@ class SiteCrawler:
     # is this the first ingest of the site? set in __init__()
     # if the first run, don't notify on new victims (b/c they are all "new")
     first_run: bool = False
+    init_scrape: bool = False
 
     # headers to be used for requests
     headers: Dict[str, str]
