@@ -38,7 +38,7 @@ class Medusa(SiteCrawler):
 
     def scrape_victims(self):
         with Proxy() as p:
-            i = 1
+            i = 0
             while True:
                 r = p.get(f"{self.url}/api/search?company=&page={i}", headers=self.headers).text.strip()
                 self._handle_page(r)
