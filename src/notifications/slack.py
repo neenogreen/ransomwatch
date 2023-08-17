@@ -55,7 +55,7 @@ class SlackNotification(NotificationSource):
                                 },
                                 {
                                     "type": "mrkdwn",
-                                    "text": f"*First Seen:*\n{datetime.strftime(victim.first_seen, '%b %d, %Y at %H:%M:%S UTC')}"
+                                    "text": f"*First Seen:*\n{datetime.strftime(victim.first_seen, '%b %d, %Y at %H:%M:%S UTC')}" if victim.first_seen is not None else "*First Seen:*\nNone"
                                 },
                                 {
                                     "type": "mrkdwn",
