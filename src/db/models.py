@@ -27,7 +27,7 @@ class Victim(Base):
     name = Column(String)
     url = Column(String, unique=True, nullable=True, default=None) # not all sites have individual victim URLs
     published = Column(DateTime(timezone=True), nullable=True)
-    first_seen = Column(DateTime(timezone=True))
+    first_seen = Column(DateTime(timezone=True), nullable=True)
     last_seen = Column(DateTime(timezone=True))
     removed = Column(Boolean, default=False)
 
