@@ -87,7 +87,7 @@ def main(argv):
         sites.Malas,
         sites.Rancoz,
         sites.RaGroup,
-        sites.Medusa,
+        sites.MedusaRansomware,
         sites.BlackSuit,
         sites.Vendetta,
         sites.Dunghill,

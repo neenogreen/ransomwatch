@@ -60,7 +60,7 @@ from .cryptnet import Cryptnet
 from .malas import Malas
 from .rancoz import Rancoz
 from .ragroup import RaGroup
-from .medusa import Medusa
+from .medusaransomware import MedusaRansomware
 from .blacksuit import BlackSuit
 from .vendetta import Vendetta
 from .dunghill import Dunghill

@@ -9,8 +9,8 @@ from db.models import Victim
 from net.proxy import Proxy
 from .sitecrawler import SiteCrawler
 
-class Medusa(SiteCrawler):
-    actor = "Medusa"
+class MedusaRansomware(SiteCrawler):
+    actor = "MedusaRansomware"
 
     def _handle_page(self, body: str):
         for victim in json.loads(body)["list"]:
