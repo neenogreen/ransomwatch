@@ -73,6 +73,7 @@ sites:
   medusalocker: http://something.onion
   cactus: http://something.onion
   rhysida: http://something.onion
+  noescape: http://something.onion
 
 # slack webhooks
 notifications:

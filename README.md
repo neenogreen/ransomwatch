@@ -105,6 +105,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] AvosLocker
 - [X] Cactus
 - [X] Rhysida
+- [X] NoEscape
 
 ## Leak Sites lists
 
