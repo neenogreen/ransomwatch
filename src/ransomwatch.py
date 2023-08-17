@@ -92,7 +92,7 @@ def main(argv):
         sites.Vendetta,
         sites.Dunghill,
         sites.Trigona,
-        sites.RansomwareBlog,
+        sites.MedusaLocker,
         sites.Cactus,
         sites.Rhysida
     ]

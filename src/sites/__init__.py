@@ -65,6 +65,6 @@ from .blacksuit import BlackSuit
 from .vendetta import Vendetta
 from .dunghill import Dunghill
 from .trigona import Trigona
-from .ransomwareblog import RansomwareBlog
+from .medusalocker import MedusaLocker
 from .cactus import Cactus
 from .rhysida import Rhysida

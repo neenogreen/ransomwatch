@@ -7,8 +7,8 @@ from db.models import Victim
 from net.proxy import Proxy
 from .sitecrawler import SiteCrawler
 
-class RansomwareBlog(SiteCrawler):
-    actor = "RansomwareBlog"
+class MedusaLocker(SiteCrawler):
+    actor = "MedusaLocker"
 
     def _handle_page(self, body: str):
         soup = BeautifulSoup(body, "html.parser")
