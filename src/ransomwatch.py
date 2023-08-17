@@ -156,7 +156,10 @@ def main(argv):
             # send notifications for old victims 
             logging.info("Notifying for old victims")
             for v in s.new_victims:
-                v.first_seen = v.published
+                if v.first_seen == v.published:
+                    v.first_seen = None
+                else:
+                    v.first_seen = v.published
                 NotificationManager.send_new_victim_notification(v)
 
         logging.info(f"Identifying removed victims")

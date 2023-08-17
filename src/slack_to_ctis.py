@@ -71,7 +71,10 @@ def main(argv):
             if "PUBLISHED" in name and "Lockbit" in actor:
                 continue
             published = datetime.strptime(e["attachments"][0]["blocks"][1]["fields"][2]["text"].split("\n")[1], "%b %d, %Y")
-            first_seen = datetime.strptime(e["attachments"][0]["blocks"][1]["fields"][3]["text"].split("\n")[1], "%b %d, %Y at %H:%M:%S UTC")
+            try:
+                first_seen = datetime.strptime(e["attachments"][0]["blocks"][1]["fields"][3]["text"].split("\n")[1], "%b %d, %Y at %H:%M:%S UTC")
+            except:
+                first_seen = None
             try:
                 description = e["attachments"][0]["blocks"][1]["fields"][4]["text"][14:]
             except:

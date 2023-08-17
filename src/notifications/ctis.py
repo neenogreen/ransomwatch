@@ -113,7 +113,6 @@ class CTISNotification():
             {
                 "confidence": 100,
                 "description": description.replace('\n', '\r\n'),
-                "first_seen": str(first_seen) + "Z",
                 "labels": ["Type:ransomware"],
                 "name": name,
                 "x-sources": [
@@ -126,6 +125,9 @@ class CTISNotification():
                 ]
             }
         ]
+
+        if first_seen:
+            json_query[0]["first_seen"] = str(first_seen) + "Z"
 
         return self.do_req("/x-operations", json_query)
 
