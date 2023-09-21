@@ -95,7 +95,8 @@ def main(argv):
         sites.MedusaLocker,
         sites.Cactus,
         sites.Rhysida,
-        sites.NoEscape
+        sites.NoEscape,
+        sites.Cloak
     ]
 
     NotificationManager.send_info_notification(f"Starting: Found {len(sites_to_analyze)} sites")

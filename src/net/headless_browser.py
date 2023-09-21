@@ -116,6 +116,9 @@ class HeadlessBrowser:
     def find_element_by_name(self, name):
         return self.DRIVER.find_element(By.NAME, name)
 
+    def find_element_by_css_selector(self, selector):
+        return self.DRIVER.find_element(By.CSS_SELECTOR, selector)
+
     def find_elements_by_name(self, name):
         return self.DRIVER.find_elements(By.NAME, name)
 
