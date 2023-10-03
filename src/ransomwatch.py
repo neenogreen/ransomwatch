@@ -96,7 +96,8 @@ def main(argv):
         sites.Cactus,
         sites.Rhysida,
         sites.NoEscape,
-        sites.Cloak
+        sites.Cloak,
+        sites.LostTrust
     ]
 
     NotificationManager.send_info_notification(f"Starting: Found {len(sites_to_analyze)} sites")

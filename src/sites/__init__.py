@@ -70,3 +70,4 @@ from .cactus import Cactus
 from .rhysida import Rhysida
 from .noescape import NoEscape
 from .cloak import Cloak
+from .losttrust import LostTrust

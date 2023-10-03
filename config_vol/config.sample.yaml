@@ -75,6 +75,7 @@ sites:
   rhysida: http://something.onion
   noescape: http://something.onion
   cloak: http://something.onion
+  losttrust: http://something.onion
 
 # slack webhooks
 notifications:

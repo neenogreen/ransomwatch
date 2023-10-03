@@ -107,6 +107,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] Rhysida
 - [X] NoEscape
 - [X] Cloak
+- [X] LostTrust
 
 ## Leak Sites lists
 
