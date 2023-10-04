@@ -10,6 +10,17 @@ from .sitecrawler import SiteCrawler
 class LostTrust(SiteCrawler):
     actor = "LostTrust"
 
+    def is_site_up(self) -> bool: 
+        with Proxy() as p:  
+            try:
+                r = p.get(self.url, headers=self.headers, timeout=180)   
+                if r.status_code >= 400:     
+                    return False   
+            except Exception as e: 
+                return False  
+        self.site.last_up = datetime.utcnow()    
+        return True
+
     def _handle_page(self, body: str):
         soup = BeautifulSoup(body, "html.parser")
         victim_list = soup.find_all("div", class_="col d-flex align-items-stretch mb-3")
@@ -40,6 +51,6 @@ class LostTrust(SiteCrawler):
 
     def scrape_victims(self):
         with Proxy() as p:
-            r = p.get(f"{self.url}", headers=self.headers)
+            r = p.get(f"{self.url}", headers=self.headers, timeout=180)
             self._handle_page(r.content.decode()) 
         self.site.last_scraped = datetime.utcnow()
