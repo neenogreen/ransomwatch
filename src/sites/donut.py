@@ -19,7 +19,7 @@ class Donut(SiteCrawler):
             victim_name = tmp.get_text().strip()
             victim_leak_site = self.url + tmp.find("a")["href"]
 
-            q = self.session.query(Victim).filter_by(name=victim_name,
+            q = self.session.query(Victim).filter_by(
                 url=victim_leak_site, site=self.site)
 
             if q.count() == 0:
