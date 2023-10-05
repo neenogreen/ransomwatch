@@ -10,7 +10,6 @@ from time import sleep
 from captcha_solver import CaptchaSolver
 from config import Config
 from notifications.manager import NotificationManager
-from requests_toolbelt.utils import dump
 from db.models import Victim
 
 class Cloak(SiteCrawler):
