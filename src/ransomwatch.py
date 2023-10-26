@@ -57,9 +57,50 @@ def main(argv):
         sites.LockData,
         sites.Rook,
         sites.Alphv,
-        sites.Blackbasta
+        sites.Blackbasta,
+        sites.ViceSociety,
+        sites.Royal,
+        sites.Blacktor,
+        sites.DarkLeakMarket,
+        sites.Quantum,
+        sites.DataLeak,
+        sites.Omega,
+        sites.Mallox,
+        sites.Qilin,
+        sites.Unsafe,
+        sites.Play,
+        sites.Bianlian,
+        sites.Daixin,
+        sites.Relic,
+        sites.RansomHouse,
+        sites.Nokoyawa,
+        sites.Snatch,
+        sites.Karakurt,
+        sites.FreeCivilian,
+        sites.Monti,
+        sites.MoneyMessage,
+        sites.Eightbase,
+        sites.Donut,
+        sites.Akira,
+        sites.Abyss,
+        sites.Cryptnet,
+        sites.Malas,
+        sites.Rancoz,
+        sites.RaGroup,
+        sites.MedusaRansomware,
+        sites.BlackSuit,
+        sites.Vendetta,
+        sites.Dunghill,
+        sites.Trigona,
+        sites.MedusaLocker,
+        sites.Cactus,
+        sites.Rhysida,
+        sites.NoEscape,
+        sites.Cloak,
+        sites.LostTrust
     ]
 
+    NotificationManager.send_info_notification(f"Starting: Found {len(sites_to_analyze)} sites")
     logging.info(f"Found {len(sites_to_analyze)} sites")
 
     with Proxy() as p:
@@ -106,18 +147,21 @@ def main(argv):
             # log exception
             logging.error(tb.strip())  # there is a trailing newline
 
-            # close db session
-            s.session.close()
-
-            # skip the rest of the site since the data may be messed up
-            continue
-
         logging.info(f"There are {len(s.new_victims)} new victims")
 
         # send notifications for new victims
         if not s.first_run and len(s.new_victims) > 0:
             logging.info("Notifying for new victims")
             for v in s.new_victims:
+                NotificationManager.send_new_victim_notification(v)
+        elif s.first_run and len(s.new_victims) > 0 and s.init_scrape:
+            # send notifications for old victims 
+            logging.info("Notifying for old victims")
+            for v in s.new_victims:
+                if v.first_seen.date() == v.published.date():
+                    v.first_seen = None
+                else:
+                    v.first_seen = v.published
                 NotificationManager.send_new_victim_notification(v)
 
         logging.info(f"Identifying removed victims")
@@ -135,6 +179,7 @@ def main(argv):
 
         logging.info(f"Finished {site.actor}")
 
+    NotificationManager.send_info_notification("Finished all sites, exiting")
     logging.info("Finished all sites, exiting")
 
 

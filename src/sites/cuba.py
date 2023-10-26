@@ -11,12 +11,13 @@ from .sitecrawler import SiteCrawler
 class Cuba(SiteCrawler):
     actor = "Cuba"
 
-    def extract_published_date(self, body: str):
+    def extract_published_date_and_description(self, body: str):
         soup = BeautifulSoup(body, "html.parser")
 
         p_lines = soup.find_all("p")
 
         published = None
+        description = ""
 
         for line in p_lines:
             line_description = line.text.strip()
@@ -24,7 +25,11 @@ class Cuba(SiteCrawler):
             if "Date" in line_description:
                 published = line_description[len(
                     "Date the files were received: "):]
-                break
+            elif "website:" in line_description:
+                continue
+            else:
+                description += line_description
+                description += "\n"
 
         if "." in published:
             published = published.replace(".", "")
@@ -58,7 +63,7 @@ class Cuba(SiteCrawler):
 
         published = day + " " + month + " " + year
 
-        return datetime.strptime(published, "%d %B %Y")
+        return datetime.strptime(published, "%d %B %Y"), description
 
     def _handle_page(self, body: str, p: Proxy):
         soup = BeautifulSoup(body, "html.parser")
@@ -77,9 +82,8 @@ class Cuba(SiteCrawler):
             if q.count() == 0:
                 # new victim
                 r = p.get(victim_leak_site, headers=self.headers)
-                published_dt = self.extract_published_date(r.content.decode())
-                v = Victim(name=victim_name, url=victim_leak_site, published=published_dt,
-                           first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
+                published_dt, description = self.extract_published_date_and_description(r.content.decode())
+                v = Victim(name=victim_name, description=description, url=victim_leak_site, published=published_dt, first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
                 self.session.add(v)
                 self.new_victims.append(v)
             else:

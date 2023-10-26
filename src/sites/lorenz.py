@@ -7,28 +7,26 @@ from db.models import Victim
 from net.proxy import Proxy
 from .sitecrawler import SiteCrawler
 
-
 class Lorenz(SiteCrawler):
     actor = "Lorenz"
 
     def _handle_page(self, body: str):
         soup = BeautifulSoup(body, "html.parser")
-        victim_list = soup.find_all("div", {"id" : re.compile("comp.*")})
+        victim_list = soup.find_all("div", class_="panel panel-primary")
 
         for victim in victim_list:
-            victim_h3 = victim.find("div", class_="panel-heading").find("h3")
-            if victim_h3 is None:
-                # unpublished victims are in a h4
-                continue
-            victim_name = victim_h3.text.strip()
+            victim_name = victim.find("div", class_="panel-heading").find("h3").text.strip()
             victim_leak_site = self.url + "/#" + victim.get("id")
 
             if victim.find("span", class_="glyphicon"):
                 published = victim.find("span", class_="glyphicon").next_sibling
                 published = published.lstrip()
-                published_dt = datetime.strptime(published, "Posted %b %d, %Y.")
+                try:
+                    published_dt = datetime.strptime(published, "Posted %b %d, %Y.")
+                except:
+                    published_dt = datetime.strptime(published.split("U")[0], "Posted %b %d, %Y ")
             else:
-                published = ""
+                published_dt = datetime.utcnow()
 
             q = self.session.query(Victim).filter_by(
                 url=victim_leak_site, site=self.site)
@@ -52,19 +50,5 @@ class Lorenz(SiteCrawler):
     def scrape_victims(self):
         with Proxy() as p:
             r = p.get(f"{self.url}", headers=self.headers)
-            soup = BeautifulSoup(r.content.decode(), "html.parser")
-
-            # find all pages
-            page_nav = soup.find_all("a", class_="page-numbers")
-            
-            site_list = []
-            site_list.append(self.url)
-            
-            for page in page_nav:
-                # might exist repetition
-                if page.attrs["href"] not in site_list:
-                    site_list.append(page.attrs["href"])
-            
-            for site in site_list:
-                r = p.get(site, headers=self.headers)
-                self._handle_page(r.content.decode()) 
+            self._handle_page(r.content.decode()) 
+        self.site.last_scraped = datetime.utcnow()

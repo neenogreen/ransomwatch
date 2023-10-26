@@ -38,8 +38,15 @@ class Babuk(SiteCrawler):
 
                 if q.count() == 0:
                     # new victim
+                    r = p.get(victim_leak_site, headers=self.headers)
+                    soup1 = BeautifulSoup(r.content.decode(), "html.parser")
+                    tmp = soup1.find("div", class_="col mx-auto").find_all("p")[:2]
+                    description = ""
+                    for e in tmp:
+                        description += e.get_text()
                     v = Victim(name=victim_name, url=victim_leak_site, published=published_dt,
-                               first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site)
+                               first_seen=datetime.utcnow(), last_seen=datetime.utcnow(), site=self.site,
+                               description=description)
                     self.session.add(v)
                     self.new_victims.append(v)
                 else:

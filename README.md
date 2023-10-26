@@ -1,10 +1,6 @@
 # RansomWatch
 
-[![Build Image](https://github.com/captainGeech42/ransomwatch/workflows/Build%20Image/badge.svg)](https://github.com/captainGeech42/ransomwatch/actions?query=workflow%3A%22Build+Image%22) [![Docker Hub Publish](https://github.com/captainGeech42/ransomwatch/workflows/Docker%20Hub%20Publish/badge.svg)](https://github.com/captainGeech42/ransomwatch/actions?query=workflow%3A%22Docker+Hub+Publish%22) [![Docker Hub Image](https://img.shields.io/docker/v/captaingeech/ransomwatch?color=blue)](https://hub.docker.com/repository/docker/captaingeech/ransomwatch/general)
-
 RansomWatch is a ransomware leak site monitoring tool. It will scrape all of the entries on various ransomware leak sites, store the data in a SQLite database, and send notifications via Slack or Discord when a new victim shows up, or when a victim is removed.
-
-_Note: RansomWatch isn't being actively updated for the latest sites, and is mostly reliant on third-party contributions. Please open a pull request, and/or DM me on [Twitter](https://twitter.com/captainGeech42)._
 
 ## Configuration
 
@@ -16,6 +12,8 @@ In `config_vol/`, please copy `config.sample.yaml` to `config.yaml`, and add the
   * Slack: Follow [these](https://api.slack.com/messaging/webhooks) instructions to add a new app to your Slack workspace and add the webhook URL to the config.
   * Discord: Follow [these](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) instructions to add a new app to your Discord server and add the webhook URL to the config.
   * Teams: Follow [these](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook) instructions to add a new app to your Teams channel and add the webhook URL to the config.
+  * Telegram: simply create a new bot with BotFather, add it to the group in which you want to receive notifications and compile the config file
+* 2captcha api key: to bypass captchas
 
 Additionally, there are a few environment variables you may need to set:
 
@@ -34,28 +32,6 @@ Then, add it to your crontab. Example crontab entry (running every 8 hours):
 
 ```
 */30 * * * * cd /home/ioc/ransomwatch && ./run.sh
-```
-
-If you'd prefer, you can use the image published on Docker Hub ([`captaingeech/ransomwatch`](https://hub.docker.com/repository/docker/captaingeech/ransomwatch/general)) instead, with a `docker-compose.yml` that looks something like this:
-
-```yml
-version: "3"
-
-services:
-  app:
-    image: captaingeech/ransomwatch:latest
-    depends_on:
-      - proxy
-    volumes:
-      - ./db_vol:/db
-      - ./config_vol:/config
-    environment:
-      PYTHONUNBUFFERED: 1
-      RW_DB_PATH: /db/ransomwatch.db
-      RW_CONFIG_PATH: /config/config.yaml
-
-  proxy:
-    image: captaingeech/tor-proxy:latest
 ```
 
 This can also be run via the command line, but that requires you to have your own Tor proxy (with the control service) running. Example execution:
@@ -78,17 +54,87 @@ The messages sent to Discord and Teams are very similar in style, identical in c
 
 ## Leak Site Implementations
 
-The following leak sites are supported:
+The following leak sites are supported (unchecked are currently not monitored by Leonardo):
 
 - [x] Everest
 - [X] Cuba
 - [X] RansomEXX
 - [X] Lockbit
-- [X] Hive
+- [] Hive
 - [X] Blackbyte
 - [X] Blackbasta
+- [X] Lorenz
+- [X] Cl0p
+- [X] ViceSociety
+- [X] Royal
+- [X] Ragnar Locker
+- [X] Babuk
+- [X] Blacktor
+- [X] Dark Leak Market
+- [X] Quantum
+- [X] DataLeak
+- [X] 0mega
+- [X] Mallox
+- [X] Qilin
+- [X] Unsafe
+- [X] Play
+- [X] Bianlian
+- [X] Daixin
+- [X] Relic
+- [X] RansomHouse
+- [X] Nokoyawa
+- [X] Snatch
+- [X] Karakurt
+- [X] Free Civilian
+- [X] Monti
+- [X] MoneyMessage
+- [X] 8base
+- [X] Donut
+- [X] Akira
+- [X] Abyss
+- [X] Cryptnet
+- [X] Malas
+- [X] Rancoz
+- [X] Ra Group
+- [X] MedusaRansomware
+- [X] BlackSuit
+- [X] Vendetta
+- [X] Dunghill
+- [X] Trigona
+- [X] MedusaLocker
+- [X] AvosLocker
+- [X] Cactus
+- [X] Rhysida
+- [X] NoEscape
+- [X] Cloak
+- [X] LostTrust
 
 ## Leak Sites lists
 
 - https://ransomwatch.telemetry.ltd/#/INDEX
 - https://github.com/fastfire/deepdarkCTI/blob/main/ransomware_gang.md
+
+# Slack to CTIS
+
+Transfer slack notifications to Leonardo's CTIS platform.
+
+## How to
+
+Add to your crontab the following line: `*/5 * * * * /PATH/TO/run_bridge.sh >> /EVENTUAL/LOG/FILE 2>&1`
+
+## Configuration
+
+In ransomwatch's config file there is a section dedicated to slack to ctis integration; here's an example of it filled with information.
+
+```
+slack_to_ctis:
+  slack_error_url: channel url for errors
+  slack:
+    token: xoxb-TOKEN
+    channel_id: C03XXXXXXGN # channel un which the bridge will work
+  ctis:
+    url: https://cis.smth.com
+    username: username
+    password: password
+  time_path: /PATH/TO/TIME/FILE # file in which the bridge will save the timestamp of the last message bridged
+```

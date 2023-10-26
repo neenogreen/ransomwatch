@@ -134,7 +134,7 @@ class DiscordNotification(NotificationSource):
                 {
                     "title": f"{'Fatal ' if fatal else ''}Error",
                     "color": 16515843,
-                    "description": f"**An error occurred:** {context}\n\n```{error}```\nFor more details, please check the app container logs\n\n_If you think this is a bug, please [open an issue](https://github.com/captainGeech42/ransomwatch/issues) on GitHub_",
+                    "description": f"**An error occurred:** {context}\n\n```{error}```\nFor more details, please check the app container logs\n\n_If you think this is a bug, please [open an issue](https://github.com/neenogreen/ransomwatch/issues) on GitHub_",
                 }
             ]
         }

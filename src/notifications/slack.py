@@ -2,6 +2,7 @@ from datetime import datetime
 import logging
 import requests
 from typing import Dict
+import json
 
 from db.models import Site, Victim
 from .source import NotificationSource
@@ -18,6 +19,12 @@ class SlackNotification(NotificationSource):
 
     def send_new_victim_notification(url: str, victim: Victim) -> bool:
         published_ts = datetime.strftime(victim.published, '%b %d, %Y') if victim.published is not None else "N/A"
+        if victim.description:
+            description = victim.description
+        else:
+            description = " " 
+        if len(description) > 1000:
+            description = description[:1000] + "..."
 
         body = {
             "attachments": [
@@ -48,7 +55,11 @@ class SlackNotification(NotificationSource):
                                 },
                                 {
                                     "type": "mrkdwn",
-                                    "text": f"*First Seen:*\n{datetime.strftime(victim.first_seen, '%b %d, %Y at %H:%M:%S UTC')}"
+                                    "text": f"*First Seen:*\n{datetime.strftime(victim.first_seen, '%b %d, %Y at %H:%M:%S UTC')}" if victim.first_seen is not None else "*First Seen:*\nNone"
+                                },
+                                {
+                                    "type": "mrkdwn",
+                                    "text": f"*Description:*\n{description}"
                                 }
                             ]
                         },
@@ -126,11 +137,13 @@ class SlackNotification(NotificationSource):
 
     def send_site_down_notification(url: str, site: Site) -> bool:
         last_up_ts = datetime.strftime(site.last_up, '%b %d, %Y at %H:%M:%S UTC') if site.last_up is not None else "N/A"
+        diff = (datetime.utcnow() - site.last_up).total_seconds() / 3600 if site.last_up is not None else 0
 
         body = {
             "attachments": [
                 {
-                    "color": "#fcc203",
+                    # If the dls is down for at least 5 hours change the severity of the slack alert
+                    "color": "#fcc203" if diff < 5  else "#ff7518",
                     "blocks": [
                         {
                             "type": "header",
@@ -169,6 +182,14 @@ class SlackNotification(NotificationSource):
         return SlackNotification._post_webhook(body, url)
 
     def send_error_notification(url: str, context: str, error: str, fatal: bool = False) -> bool:
+
+        if error:
+            err = error
+        else:
+            err = " "
+        if len(err) > 1000:
+            err = err[:1000] + "..."
+
         body = {
             "attachments": [
                 {
@@ -192,7 +213,7 @@ class SlackNotification(NotificationSource):
                             "type": "section",
                             "text": {
                                 "type": "mrkdwn",
-                                "text": f"```{error}```\nFor more details, please check the app container logs"
+                                "text": f"```{err}```\nFor more details, please check the app container logs"
                             }
                         },
                         {
@@ -200,9 +221,36 @@ class SlackNotification(NotificationSource):
                             "elements": [
                                 {
                                     "type": "mrkdwn",
-                                    "text": "If you think this is a bug, please <https://github.com/captainGeech42/ransomwatch/issues|open an issue> on GitHub"
+                                    "text": "If you think this is a bug, please <https://github.com/neenogreen/ransomwatch/issues|open an issue> on GitHub"
                                 }
                             ]
+                        }
+                    ]
+                }
+            ]
+        }
+
+        return SlackNotification._post_webhook(body, url)
+    
+    def send_info_notification(url: str, info: str) -> bool:
+        body = {
+            "attachments": [
+                {
+                    "color": "#0FFF50",
+                    "blocks": [
+                        {
+                            "type": "header",
+                            "text": {
+                                "type": "plain_text",
+                                "text": f"Info"
+                            }
+                        },
+                        {
+                            "type": "section",
+                            "text": {
+                                "type": "mrkdwn",
+                                "text": info
+                            }
                         }
                     ]
                 }

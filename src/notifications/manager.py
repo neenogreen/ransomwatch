@@ -5,6 +5,8 @@ from db.models import Site, Victim
 from .slack import SlackNotification
 from .discord import DiscordNotification
 from .teams import TeamsNotification
+from .ctis import CTISNotification
+from .telegram import TelegramNotification
 
 class NotificationManager():
     def send_new_victim_notification(victim: Victim):
@@ -22,6 +24,13 @@ class NotificationManager():
                 elif params["type"] == "discord":
                     if not DiscordNotification.send_new_victim_notification(params["url"], victim):
                         logging.error(f"Failed to send new victim notification to Discord guild \"{dest}\"")
+                elif params["type"] == "ctis":
+                    ctis_instance = CTISNotification(params["url"], params["username"], params["password"])
+                    if not ctis_instance.send_new_victim_notification(victim):
+                        logging.error(f"Failed to send new victim notification to CTIS \"{dest}\"")
+                elif params["type"] == "telegram":
+                    if not TelegramNotification.send_new_victim_notification(params["token"], params["chat_id"], victim):
+                        logging.error(f"Failed to send new victim notification to Telegram \"{dest}\"")
                 else:
                     logging.error(f"Attempted to send a new victim notification to an unsupported notification type: {params['type']}")
     
@@ -75,5 +84,17 @@ class NotificationManager():
                 elif params["type"] == "discord":
                     if not DiscordNotification.send_error_notification(params["url"], context, error, fatal):
                         logging.error(f"Failed to send error notification to Discord guild \"{dest}\"")
+                else:
+                    logging.error(f"Attempted to send a site down notification to an unsupported notification type: {params['type']}")
+
+    def send_info_notification(info: str):
+        if "notifications" in Config and Config["notifications"]:
+            for dest, params in Config["notifications"].items():
+                if not params["info"]:
+                    continue
+
+                if params["type"] == "slack":
+                    if not SlackNotification.send_info_notification(params["url"], info):
+                        logging.error(f"Failed to send info notification to Slack workspace \"{dest}\"")
                 else:
                     logging.error(f"Attempted to send a site down notification to an unsupported notification type: {params['type']}")

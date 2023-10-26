@@ -3,11 +3,11 @@
 sites:
   conti: http://something.onion
   revil: http://something.onion
-  ##avaddon: http://something.onion
-  ##darkside: http://something.onion
+  avaddon: http://something.onion
+  darkside: http://something.onion
   babuk: http://something.onion
-  ##ranzy: http://something.onion
-  ##astro: http://something.onion
+  ranzy: http://something.onion
+  astro: http://something.onion
   pay2key: http://something.onion
   cuba: http://something.onion
   ransomexx: http://something.onion
@@ -16,10 +16,10 @@ sites:
   ragnar: http://something.onion
   suncrypt: http://something.onion
   everest: http://something.onion
-  ##nefilim: http://something.onion
-  ##cl0p: http://something.onion
+  nefilim: http://something.onion
+  cl0p: http://something.onion
   pysa: http://something.onion
-  ##lockbit: http://something.onion
+  lockbit: http://something.onion
   xing: http://something.onion
   lorenz: http://something.onion
   elcometa: http://something.onion
@@ -35,6 +35,47 @@ sites:
   blackbyte: http://something.onion
   alphv: http://something.onion
   blackbasta: http://something.onion
+  vice spider: http://something.onion
+  royal: http://something.onion
+  blacktor: http://something.onion
+  darkleakmarket: http://something.onion
+  quantum: http://something.onion
+  dataleak: http://something.onion
+  omega: http://something.onion
+  mallox: http://something.onion
+  qilin: http://something.onion
+  unsafe: http://something.onion
+  play ransomware: http://something.onion
+  bianlian: http://something.onion
+  daixin: http://something.onion
+  relic: http://something.onion
+  ransomhouse: http://something.onion
+  # this has to be their API url
+  nokoyawa: http://something.onion
+  snatch: http://something.onion
+  karakurt: http://something.onion
+  free civilian: http://something.onion
+  monti: http://something.onion
+  moneymessage: http://something.onion
+  8base: http://something.onion
+  donut: http://something.onion
+  akira: http://something.onion
+  abyss: http://something.onion
+  cryptnet: http://something.onion
+  malas: http://something.onion
+  rancoz: http://something.onion
+  ra group: http://something.onion
+  medusaransomware: http://something.onion
+  blacksuit: http://something.onion
+  vendetta: http://something.onion
+  dunghill: http://something.onion
+  trigona: http://something.onion
+  medusalocker: http://something.onion
+  cactus: http://something.onion
+  rhysida: http://something.onion
+  noescape: http://something.onion
+  cloak: http://something.onion
+  losttrust: http://something.onion
 
 # slack webhooks
 notifications:
@@ -58,6 +99,9 @@ notifications:
     # should errors be sent to this webook?
     errors: true
 
+    # should info be sent to this webhook?
+    info: true
+
     # may in the future add support for not sending leak site links
     # if you actively want this, open an issue (or make a PR)
   dest2:
@@ -67,11 +111,34 @@ notifications:
     removed_victims: true
     down_sites: true
     errors: false
+    info: false
+  dest3:
+    type: ctis
+    url: https://example.com
+    username: user
+    password: pass
+    new_victims: true
+    removed_victims: false # not implemented, useless
+    down_sites: false # not implemented, useless
+    errors: false # not implemented, useless
+    info: false # not implemented, useless
+  dest4:
+    type: telegram
+    token: XXXXX
+    chat_id: XXXXX
+    new_victims: true
+    removed_victims: false # not implemented, useless
+    down_sites: false # not implemented, useless
+    errors: false # not implemented, useless
+    info: false # not implemented, useless
 
 # how many seconds to wait for a connection
 # this is used to check if the site is up, and doesn't wait
 # for the full page data to be downloaded
 timeout: 30
+
+# 2captcha api key
+2captcha_key: XXXXX
 
 # tor proxy settings
 # the values set below are for the provided docker-compose.yml
@@ -88,3 +155,14 @@ proxy:
 
   # password for the tor control service
   password: password
+
+slack_to_ctis:
+  slack_error_url: PLACEHOLDER
+  slack:
+    token: PLACEHOLDER
+    channel_id: PLACEHOLDER
+  ctis:
+    url: PLACEHOLDER
+    username: PLACEHOLDER
+    password: PLACEHOLDER
+  time_path: PLACEHOLDER
