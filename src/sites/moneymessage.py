@@ -84,7 +84,7 @@ class MoneyMessage(SiteCrawler):
             i = 1
             while True:
                 browser.get(f"{self.url}/news.php?id={i}")
-                sleep(10)
+                sleep(20)
                 if not self._handle_page(browser):
                     break
                 i = i + 1
