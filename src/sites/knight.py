@@ -9,7 +9,6 @@ from .sitecrawler import SiteCrawler
 
 class Knight(SiteCrawler):
     actor = "Knight"
-    self.init_scrape = True
 
     def _handle_page(self, body: str):
         soup = BeautifulSoup(body, "html.parser")
@@ -40,6 +39,7 @@ class Knight(SiteCrawler):
         self.session.commit()
 
     def scrape_victims(self):
+        self.init_scrape = True
         page = 1
         while True:
             with Proxy() as p:
