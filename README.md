@@ -149,3 +149,5 @@ slack_to_ctis:
 5. Copy from src/sites the example that best fits your needs (lockbit.py for selenium, lorenz.py for requests and cl0p for captcha) in the same folder customizing it
 6. Add to config_vol/config.sample.yaml and config_vol/config.yaml the dls
 7. Test
+8. Push from the dev folder and pull from the prod one
+9. Add to config_vol/config.yaml the dls in prod
