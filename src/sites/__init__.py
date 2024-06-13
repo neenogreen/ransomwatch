@@ -71,3 +71,4 @@ from .rhysida import Rhysida
 from .noescape import NoEscape
 from .cloak import Cloak
 from .losttrust import LostTrust
+from .knight import Knight

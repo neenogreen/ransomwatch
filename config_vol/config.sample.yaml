@@ -76,6 +76,7 @@ sites:
   noescape: http://something.onion
   cloak: http://something.onion
   losttrust: http://something.onion
+  knight: http://something.onion
 
 # slack webhooks
 notifications:

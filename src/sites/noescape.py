@@ -19,7 +19,10 @@ class NoEscape(SiteCrawler):
         for victim in victim_list:
             victim_name = victim["company_name"]
             victim_leak_site = self.url + "/post/" + victim["id"]
-            description = "Website: " + victim["title"] + "\n" + re.sub("\n", " ", html2text.html2text(victim["text"]))
+            if victim.get("text"):
+                description = "Website: " + victim["title"] + "\n" + re.sub("\n", " ", html2text.html2text(victim["text"]))
+            else:
+                description = "Website: " + victim["title"]
             published_dt = datetime.strptime(victim["created_at"], "%d %b %Y")
 
             q = self.session.query(Victim).filter_by(

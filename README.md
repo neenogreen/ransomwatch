@@ -108,6 +108,7 @@ The following leak sites are supported (unchecked are currently not monitored by
 - [X] NoEscape
 - [X] Cloak
 - [X] LostTrust
+- [X] Knight
 
 ## Leak Sites lists
 
@@ -138,3 +139,15 @@ slack_to_ctis:
     password: password
   time_path: /PATH/TO/TIME/FILE # file in which the bridge will save the timestamp of the last message bridged
 ```
+
+## How to add a new DLS
+
+1. Add to the README.md the dls
+2. Add to src/ransomwatch.py the dls
+3. Add to src/sites/__init__.py the dls
+4. Depending if the dls could be accessed statically or dinamically choose if using requests or selenium is better
+5. Copy from src/sites the example that best fits your needs (lockbit.py for selenium, lorenz.py for requests and cl0p for captcha) in the same folder customizing it
+6. Add to config_vol/config.sample.yaml and config_vol/config.yaml the dls
+7. Test
+8. Push from the dev folder and pull from the prod one
+9. Add to config_vol/config.yaml the dls in prod
